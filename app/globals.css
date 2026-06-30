@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 1. Definimos nuestra paleta de colores y fuentes aquí mismo */
+@theme {
+  --color-base-dark: #0f1115;
+  --color-base-surface: #1a1d24;
+  --color-base-border: #2d313a;
+  
+  --color-accent-gold: #d4af37;
+  --color-accent-goldHover: #ebd57d;
+  
+  --color-text-main: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 2. Estilos globales del sitio */
+@layer base {
+  body {
+    background-color: var(--color-base-dark);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  
+  /* Color de la selección de texto */
+  ::selection {
+    background-color: var(--color-accent-gold);
+    color: var(--color-base-dark);
+  }
+  
+  /* Aplicamos la fuente Serif a los títulos */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
 }
