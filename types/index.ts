@@ -21,3 +21,13 @@ export interface AppProject {
   tags: string[]; // ej. ["React", "Educación", "Python"]
   url?: string;
 }
+
+export interface Book {
+  id: string;
+  title: string;
+  synopsis: string;
+  status: 'Published' | 'Upcoming' | 'Draft';
+  kindleUrl?: string;
+  coverPath?: string;
+}
+
