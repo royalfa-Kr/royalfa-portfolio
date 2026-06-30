@@ -16,9 +16,19 @@ export default function BooksPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {booksData.map((book) => (
           <div key={book.id} className="flex flex-col md:flex-row bg-base-surface border border-base-border rounded-sm overflow-hidden hover:border-accent-gold/30 transition-colors p-6 gap-6">
-            {/* Portada Placeholder */}
-            <div className="w-full md:w-40 h-56 bg-base-dark flex-shrink-0 flex items-center justify-center border border-base-border rounded-sm">
-              <span className="font-serif text-text-muted text-xs text-center px-2">[ Cover Image ]</span>
+            {/* Portada del libro */}
+            <div className="w-full md:w-48 flex-shrink-0">
+              {book.coverPath ? (
+                <img 
+                  src={book.coverPath} 
+                  alt={`Portada de ${book.title}`} 
+                  className="w-full h-auto rounded-sm border border-base-border/50 shadow-lg"
+                />
+              ) : (
+                <div className="w-full h-64 bg-base-dark flex items-center justify-center border border-base-border rounded-sm">
+                  <span className="font-serif text-text-muted text-xs text-center px-2">[ Sin portada ]</span>
+                </div>
+              )}
             </div>
             
             {/* Información del libro */}
