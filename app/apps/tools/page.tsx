@@ -13,7 +13,7 @@ export default function ToolsPage() {
 
   const displayedApps = activeFilter === 'Todas' 
     ? toolsApps 
-    : toolsApps.filter(app => app.subject === activeFilter);
+    : toolsApps.filter(app => app.subject === activeFilter).sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 md:py-24">

@@ -49,6 +49,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Geometría"]
   },
   {
+    id: "tablas-verdad",
+    title: "Tablas de Verdad",
+    description: "Entrenador interactivo de lógica proposicional. Permite practicar la evaluación de conectores lógicos con validación instantánea fila por fila y sistema de auto-rellenado.",
+    category: "educativas",
+    subject: "Lógica",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/tablas-verdad",
+    techStack: ["Next.js", "React", "Lógica"]
+  },
+  {
     id: "med-tracker",
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",

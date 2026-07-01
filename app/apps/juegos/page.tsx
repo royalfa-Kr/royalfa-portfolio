@@ -5,7 +5,7 @@ import { appsData } from "@/data/apps";
 import { Dices } from "lucide-react";
 
 export default function JuegosPage() {
-  const juegosApps = appsData.filter(app => app.category === 'juegos');
+  const juegosApps = appsData.filter(app => app.category === 'juegos').sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 md:py-24">
