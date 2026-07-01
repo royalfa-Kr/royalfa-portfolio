@@ -1,19 +1,47 @@
-// data/apps.ts
-import { AppProject } from "@/types";
+export type AppCategory = 'educativas' | 'tools' | 'juegos';
+export type AppStatus = 'Publicada' | 'Fase 1 (Prueba)' | 'En desarrollo' | 'Concepto';
 
-export const appsData: AppProject[] = [
+export interface AppItem {
+  id: string;
+  title: string;
+  description: string;
+  category: AppCategory;
+  status: AppStatus; // <-- Nueva propiedad agregada
+  isExternal: boolean;
+  url: string;
+  coverPath?: string;
+  techStack?: string[];
+}
+
+export const appsData: AppItem[] = [
   {
-    id: "quimica-master",
-    title: "Química Master",
-    description: "Herramienta interactiva para el estudio y práctica de nomenclatura química.",
-    status: "Published",
-    tags: ["Educación", "Web App"],
+    id: "estructura-atomica",
+    title: "Práctica de Estructura Atómica",
+    description: "Herramienta interactiva para dominar la tabla periódica. A partir de un solo dato inicial (ej. Z=80), el estudiante debe deducir el resto de la estructura: elemento (Hg), protones, neutrones, electrones, masa atómica y carga.",
+    category: "educativas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/estructura-atomica",
+    techStack: ["Next.js", "React", "Química"]
   },
   {
-    id: "life-rpg",
-    title: "Life RPG Dashboard",
-    description: "Sistema modular para la gestión de hábitos y proyectos personales con mecánicas adaptativas.",
-    status: "Prototype",
-    tags: ["Productividad", "React"],
+    id: "venn-diagrams",
+    title: "Diagramas de Venn",
+    description: "Operaciones con conjuntos expresados en un diagrama de Venn.",
+    category: "educativas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/venn",
+    techStack: ["Next.js", "Lógica Matemática"]
+  },
+  {
+    id: "med-tracker",
+    title: "MediControl",
+    description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",
+    category: "tools",
+    status: "Fase 1 (Prueba)",
+    isExternal: true,
+    url: "https://tu-enlace-de-netlify.app", // Recuerda poner tu link real de Netlify aquí
+    techStack: ["React", "PWA", "Offline"]
   }
 ];
