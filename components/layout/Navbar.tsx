@@ -41,6 +41,24 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          {/* Botón de Ko-fi para el menú */}
+            <a 
+              href="https://ko-fi.com/royalfa" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-accent-gold/10 text-accent-gold border border-accent-gold/30 rounded-sm hover:bg-accent-gold hover:text-base-dark transition-all duration-300"
+          >
+          {/* Ícono de tacita de café SVG */}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 10h2a2 2 0 012 2v2a2 2 0 01-2 2h-2"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 4v1"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 4v1"></path>
+              </svg>
+              <span>Invítame un café</span>
+            </a>
+
         </div>
 
         {/* Mobile Toggle */}
