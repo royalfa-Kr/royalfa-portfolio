@@ -60,7 +60,7 @@ export default function VennPage() {
 
     const templates = currentLevel === 1 ? templatesL1 : templatesL2;
 
-    let newOp;
+    let newOp: any = null;
     let hasResult = false;
     
     // Bucle para asegurar que la operación pinte al menos una región
