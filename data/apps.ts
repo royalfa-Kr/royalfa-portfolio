@@ -35,6 +35,16 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "Lógica Matemática"]
   },
   {
+    id: "memorama-geometrico",
+    title: "Memorama Geométrico",
+    description: "Juego de memoria para emparejar figuras geométricas (área y perímetro) con sus respectivas fórmulas matemáticas.",
+    category: "educativas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/memorama-geometrico",
+    techStack: ["Next.js", "React", "Geometría"]
+  },
+  {
     id: "med-tracker",
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",
