@@ -11,6 +11,7 @@ export interface AppItem {
   url: string;
   coverPath?: string;
   techStack?: string[];
+  subject?: string;
 }
 
 export const appsData: AppItem[] = [
@@ -19,6 +20,7 @@ export const appsData: AppItem[] = [
     title: "Práctica de Estructura Atómica",
     description: "Herramienta interactiva para dominar la tabla periódica. A partir de un solo dato inicial (ej. Z=80), el estudiante debe deducir el resto de la estructura: elemento (Hg), protones, neutrones, electrones, masa atómica y carga.",
     category: "educativas",
+    subject: "Química",
     status: "Publicada",
     isExternal: false,
     url: "/apps/estructura-atomica",
@@ -29,6 +31,7 @@ export const appsData: AppItem[] = [
     title: "Diagramas de Venn",
     description: "Operaciones con conjuntos expresados en un diagrama de Venn.",
     category: "educativas",
+    subject: "Matemáticas",
     status: "Publicada",
     isExternal: false,
     url: "/apps/venn",
@@ -39,6 +42,7 @@ export const appsData: AppItem[] = [
     title: "Memorama Geométrico",
     description: "Juego de memoria para emparejar figuras geométricas (área y perímetro) con sus respectivas fórmulas matemáticas.",
     category: "educativas",
+    subject: "Matemáticas",
     status: "Publicada",
     isExternal: false,
     url: "/apps/memorama-geometrico",
@@ -49,6 +53,7 @@ export const appsData: AppItem[] = [
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",
     category: "tools",
+    subject: "Salud",
     status: "Fase 1 (Prueba)",
     isExternal: true,
     url: "https://tu-enlace-de-netlify.app", // Recuerda poner tu link real de Netlify aquí
