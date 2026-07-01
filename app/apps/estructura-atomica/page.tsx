@@ -232,7 +232,7 @@ export default function EstructuraAtomicaPage() {
           <p className="text-text-muted italic">NOTA: Los nombres de los elementos químicos deben tener acento.</p>
         </header>
 
-        <div className="bg-base-surface rounded-sm shadow-xl overflow-hidden border border-base-border">
+        <div className="bg-base-surface rounded-sm shadow-xl overflow-hidden border border-base-border">    
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-center border-collapse">
               <thead>
@@ -271,7 +271,7 @@ export default function EstructuraAtomicaPage() {
                                     res.valid === false ? 'border-red-500/80 text-red-400' : 'border-base-border focus:border-accent-gold'
                                   }`}
                               >
-                                {f.options.map(opt => (
+                                {f.options?.map(opt => (
                                   <option key={opt} value={opt}>{opt || '...'}</option>
                                 ))}
                               </select>
