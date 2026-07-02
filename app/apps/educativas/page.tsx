@@ -102,7 +102,7 @@ export default function EducativasPortal() {
                     </h2>
                     <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-full ${
                       app.status === 'Publicada' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 
-                      app.status === 'En Desarrollo' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 
+                      app.status === 'En desarrollo' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 
                       'bg-slate-800 text-slate-400 border border-slate-700'
                     }`}>
                       {app.status}
