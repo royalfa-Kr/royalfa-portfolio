@@ -8,7 +8,7 @@ import { FlaskConical, Dna, Calculator, ChevronRight, Beaker, AppWindow, Brain, 
 import { appsData } from '@/data/apps'; 
 
 // Función para asignar iconos y colores según el Subject (Materia)
-const getSubjectIcon = (subject: string) => {
+const getSubjectIcon = (subject?: string) => {
   switch (subject?.toLowerCase()) {
     case 'biología':
       return <Dna size={24} className="text-emerald-500" />;
