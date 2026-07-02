@@ -60,6 +60,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Lógica"]
   },
   {
+    id: "celula",
+    title: "La Célula",
+    description: "Diagrama interactivo 2D para explorar y evaluar el conocimiento de los organelos en células animales y vegetales. Incluye modo de estudio y evaluación.",
+    category: "educativas",
+    subject: "Biología",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/celula",
+    techStack: ["Next.js", "React", "Biología"]
+  },
+  {
     id: "med-tracker",
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",

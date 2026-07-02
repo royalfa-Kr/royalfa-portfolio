@@ -15,9 +15,10 @@ export default function EducativasPage() {
   const subjects = ['Todas', ...Array.from(new Set(educativasApps.map(app => app.subject).filter(Boolean)))];
 
   // 3. Filtrar las apps según el botón seleccionado
-  const displayedApps = activeFilter === 'Todas' 
+  const displayedApps = [...(activeFilter === 'Todas' 
     ? educativasApps 
-    : educativasApps.filter(app => app.subject === activeFilter).sort((a, b) => a.title.localeCompare(b.title));
+    : educativasApps.filter(app => app.subject === activeFilter))]
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 md:py-24">
