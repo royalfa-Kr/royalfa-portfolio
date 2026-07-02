@@ -51,16 +51,22 @@ export default function App() {
 
   // Aplanar datos para los selectores
   const allData = useMemo(() => {
-    const m = [], s = [], v = [], h = [], her = [];
+    // 1. Le decimos explícitamente a TypeScript que son arreglos de strings
+    const m: string[] = [], s: string[] = [], v: string[] = [], h: string[] = [], her: string[] = [];
+    
     ownedExpansions.forEach(exp => {
-      const data = EXPANSIONS[exp];
+      // 2. Le aseguramos a TypeScript que 'exp' es una llave válida de nuestro objeto
+      const data = EXPANSIONS[exp as keyof typeof EXPANSIONS];
       if (!data) return;
-      if (data.masterminds) m.push(...data.masterminds.map(x => `${x.name} (${data.name})`));
-      if (data.schemes) s.push(...data.schemes.map(x => `${x} (${data.name})`));
-      if (data.villains) v.push(...data.villains.map(x => `${x} (${data.name})`));
-      if (data.henchmen) h.push(...data.henchmen.map(x => `${x} (${data.name})`));
-      if (data.heros) her.push(...data.heros.map(x => `${x} (${data.name})`));
+      
+      // 3. Tipamos temporalmente con 'any' o 'string' en los mapeos para evitar más quejas
+      if (data.masterminds) m.push(...data.masterminds.map((x: any) => `${x.name} (${data.name})`));
+      if (data.schemes) s.push(...data.schemes.map((x: string) => `${x} (${data.name})`));
+      if (data.villains) v.push(...data.villains.map((x: string) => `${x} (${data.name})`));
+      if (data.henchmen) h.push(...data.henchmen.map((x: string) => `${x} (${data.name})`));
+      if (data.heros) her.push(...data.heros.map((x: string) => `${x} (${data.name})`));
     });
+    
     return { 
       masterminds: m.sort(), schemes: s.sort(), 
       villains: v.sort(), henchmen: h.sort(), heroes: her.sort() 
