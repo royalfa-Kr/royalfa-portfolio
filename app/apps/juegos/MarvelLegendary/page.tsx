@@ -74,29 +74,30 @@ export default function App() {
   }, [ownedExpansions]);
 
   // Manejadores del Formulario
-  const updateArrayField = (field, index, value) => {
-    const newArr = [...captureForm[field]];
+  const updateArrayField = (field: any, index: number, value: any) => {
+    const newArr = [...(captureForm as any)[field]];
     newArr[index] = value;
     setCaptureForm({ ...captureForm, [field]: newArr });
   };
-  const addArrayField = (field, defaultValue = '') => {
-    setCaptureForm({ ...captureForm, [field]: [...captureForm[field], defaultValue] });
+  
+  const addArrayField = (field: any, defaultValue: any = '') => {
+    setCaptureForm({ ...captureForm, [field]: [...(captureForm as any)[field], defaultValue] });
   };
-  const removeArrayField = (field, index) => {
-    const newArr = [...captureForm[field]];
+  
+  const removeArrayField = (field: any, index: number) => {
+    const newArr = [...(captureForm as any)[field]];
     newArr.splice(index, 1);
     setCaptureForm({ ...captureForm, [field]: newArr });
   };
 
-  const updatePlayer = (index, key, value) => {
+  const updatePlayer = (index: number, key: any, value: any) => {
     const newPlayers = [...captureForm.players];
-    newPlayers[index][key] = value;
+    // Aseguramos la inmutabilidad del objeto jugador para evitar otro enojo de TypeScript
+    newPlayers[index] = { ...newPlayers[index], [key]: value }; 
     setCaptureForm({ ...captureForm, players: newPlayers });
   };
 
   const saveGame = () => {
-    // Por ahora solo reseteamos el formulario.
-    // Mañana implementamos el guardado en localStorage.
     setCaptureForm({
       mastermind: '', scheme: '', horrorCards: false,
       villains: [''], henchmen: [''], heroes: [''],
@@ -105,7 +106,7 @@ export default function App() {
     setView('history');
   };
 
-  const SidebarItem = ({ icon: Icon, label, id }) => (
+  const SidebarItem = ({ icon: Icon, label, id }: { icon: any, label: string, id: string }) => (
     <button onClick={() => setView(id)} className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all ${view === id ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}>
       <Icon size={18} />
       <span className="font-bold text-[10px] uppercase tracking-[0.1em]">{label}</span>
