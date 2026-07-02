@@ -76,7 +76,7 @@ export const appsData: AppItem[] = [
     description: "Bitácora de misiones para Marvel Legendary. Registra Masterminds, Schemes, fuerzas enemigas y puntuaciones de los agentes.",
     category: "juegos",
     subject: "Juegos de Mesa",
-    status: "En Desarrollo",
+    status: "En desarrollo",
     isExternal: false,
     url: "/apps/juegos/MarvelLegendary",
     techStack: ["Next.js", "React", "Local Storage"]
