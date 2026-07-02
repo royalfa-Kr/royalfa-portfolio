@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rompecabezas de Valencias Químicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .periodic-grid {
+            display: grid;
+            grid-template-columns: repeat(18, minmax(0, 1fr));
+            gap: 4px;
+            user-select: none;
+        }
+        .column-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #64748b; /* slate-500 */
+            padding-bottom: 4px;
+        }
+        .element-card {
+            aspect-ratio: 1 / 1.1;
+            font-size: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #334155; /* slate-700 */
+            border-radius: 4px;
+            background: #1e293b; /* slate-800 */
+            color: #f1f5f9; /* slate-100 */
+            transition: all 0.2s;
+            position: relative;
+            padding: 1px;
+        }
+        .element-card.drag-over {
+            background-color: #713f12; /* amber-900 */
+            border-color: #eab308; /* yellow-500 */
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .element-card.correct {
+            border-color: #22c55e;
+            background-color: #064e3b; /* emerald-900 */
+        }
+        .valence-tile {
+            cursor: grab;
+            padding: 6px 8px;
+            background: #0f172a; /* slate-950 */
+            border: 2px solid #6366f1; /* indigo-500 */
+            color: #f8fafc; /* slate-50 */
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+            text-align: center;
+            min-width: 45px;
+            font-size: 0.8rem;
+        }
+        .valence-tile:active {
+            cursor: grabbing;
+        }
+        .correct-valence-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1px;
+            margin-top: 1px;
+            max-height: 50%;
+            overflow: hidden;
+        }
+        .correct-valence-tag {
+            font-weight: bold;
+            color: #4ade80; /* green-400 */
+            font-size: 0.55rem;
+            background: #022c22; /* emerald-950 */
+            padding: 0 1px;
+            border-radius: 2px;
+            border: 1px solid #22c55e;
+        }
+        .empty-cell {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen p-2 md:p-6 text-slate-200">
+
+    <div class="max-w-7xl mx-auto relative">
+        
+        <!-- Botón de Regreso al Catálogo -->
+        <div class="mb-2 md:absolute md:top-0 md:left-0">
+            <a href="/apps/educativas" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-400 bg-slate-900 border border-slate-800 rounded-lg hover:text-indigo-400 hover:border-indigo-500/50 hover:bg-slate-800 transition-all shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                Volver al Laboratorio
+            </a>
+        </div>
+
+        <header class="text-center mb-4 pt-2 md:pt-0">
+            <h1 class="text-3xl font-black text-indigo-400 tracking-tight mt-4 md:mt-0">Rompecabezas de Valencias Pro</h1>
+            <p id="game-status" class="text-slate-400 mt-1">Completa la tabla periódica con sus números de oxidación más comunes.</p>
+        </header>
+
+        <!-- Tabla Periódica -->
+        <div class="overflow-x-auto p-4 bg-slate-900 rounded-2xl shadow-2xl border border-slate-800">
+            <div id="periodic-table" class="periodic-grid">
+                <!-- Los encabezados y elementos se generan por JS -->
+            </div>
+        </div>
+
+        <!-- Banco de Fichas -->
+        <div class="bg-slate-900 p-5 mt-6 rounded-2xl shadow-2xl border border-slate-800">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-5 gap-4">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-lg font-bold text-slate-300 uppercase tracking-widest">Fichas de Valencia</h2>
+                    <div id="score-display" class="hidden text-sm bg-slate-950 text-indigo-300 px-4 py-1.5 rounded-full border border-slate-800">
+                        Intentos fallidos: <span id="fail-count" class="font-black text-indigo-400">0</span>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 justify-center items-center">
+                    <div class="flex items-center gap-2 mr-2 bg-slate-950 p-1.5 rounded-lg border border-slate-800">
+                        <label class="text-xs font-bold text-slate-500 uppercase ml-2">Elementos:</label>
+                        <input type="number" id="quiz-count" value="15" min="1" max="50" class="w-14 px-2 py-1 text-sm bg-slate-900 border border-slate-700 text-slate-200 rounded outline-none focus:border-indigo-500">
+                        <button id="btn-quiz" class="px-4 py-1.5 bg-indigo-600 text-white rounded font-bold uppercase text-xs hover:bg-indigo-500 transition">Modo Ejercicio</button>
+                    </div>
+                    <button id="show-answers" class="px-5 py-2 bg-emerald-600 text-white rounded-lg font-bold uppercase text-xs hover:bg-emerald-500 transition">Ver Soluciones</button>
+                    <button id="btn-reset" class="px-5 py-2 bg-slate-700 text-white rounded-lg font-bold uppercase text-xs hover:bg-slate-600 transition">Reiniciar</button>
+                </div>
+            </div>
+            <div id="valence-bank" class="flex flex-wrap gap-2 justify-center">
+                <!-- Las fichas se generan por JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const elements = [
+            // Periodo 1
+            { s: 'H', n: 'Hidrógeno', r: 1, c: 1, v: ['+1', '-1'] },
+            { s: 'He', n: 'Helio', r: 1, c: 18, v: ['0'] },
+            // Periodo 2
+            { s: 'Li', n: 'Litio', r: 2, c: 1, v: ['+1'] },
+            { s: 'Be', n: 'Berilio', r: 2, c: 2, v: ['+2'] },
+            { s: 'B', n: 'Boro', r: 2, c: 13, v: ['+3'] },
+            { s: 'C', n: 'Carbono', r: 2, c: 14, v: ['+4', '-4'] },
+            { s: 'N', n: 'Nitrógeno', r: 2, c: 15, v: ['3, 5', '-3'] },
+            { s: 'O', n: 'Oxígeno', r: 2, c: 16, v: ['-2'] },
+            { s: 'F', n: 'Flúor', r: 2, c: 17, v: ['-1'] },
+            { s: 'Ne', n: 'Neón', r: 2, c: 18, v: ['0'] },
+            // Periodo 3
+            { s: 'Na', n: 'Sodio', r: 3, c: 1, v: ['+1'] },
+            { s: 'Mg', n: 'Magnesio', r: 3, c: 2, v: ['+2'] },
+            { s: 'Al', n: 'Aluminio', r: 3, c: 13, v: ['+3'] },
+            { s: 'Si', n: 'Silicio', r: 3, c: 14, v: ['+4', '-4'] },
+            { s: 'P', n: 'Fósforo', r: 3, c: 15, v: ['3, 5', '-3'] },
+            { s: 'S', n: 'Azufre', r: 3, c: 16, v: ['2, 4, 6', '-2'] },
+            { s: 'Cl', n: 'Cloro', r: 3, c: 17, v: ['-1', '1, 3, 5, 7'] },
+            { s: 'Ar', n: 'Argón', r: 3, c: 18, v: ['0'] },
+            // Periodo 4
+            { s: 'K', n: 'Potasio', r: 4, c: 1, v: ['+1'] },
+            { s: 'Ca', n: 'Calcio', r: 4, c: 2, v: ['+2'] },
+            { s: 'Sc', n: 'Escandio', r: 4, c: 3, v: ['+3'] },
+            { s: 'Ti', n: 'Titanio', r: 4, c: 4, v: ['2, 3, 4'] },
+            { s: 'V', n: 'Vanadio', r: 4, c: 5, v: ['2, 3, 4, 5'] },
+            { s: 'Cr', n: 'Cromo', r: 4, c: 6, v: ['2, 3, 6'] },
+            { s: 'Mn', n: 'Manganeso', r: 4, c: 7, v: ['2, 3, 4, 6, 7'] },
+            { s: 'Fe', n: 'Hierro', r: 4, c: 8, v: ['+2, +3'] },
+            { s: 'Co', n: 'Cobalto', r: 4, c: 9, v: ['+2, +3'] },
+            { s: 'Ni', n: 'Níquel', r: 4, c: 10, v: ['+2, +3'] },
+            { s: 'Cu', n: 'Cobre', r: 4, c: 11, v: ['+1, +2'] },
+            { s: 'Zn', n: 'Zinc', r: 4, c: 12, v: ['+2'] },
+            { s: 'Ga', n: 'Galio', r: 4, c: 13, v: ['+3'] },
+            { s: 'Ge', n: 'Germanio', r: 4, c: 14, v: ['+4', '-4'] },
+            { s: 'As', n: 'Arsénico', r: 4, c: 15, v: ['3, 5', '-3'] },
+            { s: 'Se', n: 'Selenio', r: 4, c: 16, v: ['2, 4, 6', '-2'] },
+            { s: 'Br', n: 'Bromo', r: 4, c: 17, v: ['-1', '1, 3, 5, 7'] },
+            { s: 'Kr', n: 'Kriptón', r: 4, c: 18, v: ['0'] },
+            // Periodo 5
+            { s: 'Rb', n: 'Rubidio', r: 5, c: 1, v: ['+1'] },
+            { s: 'Sr', n: 'Estroncio', r: 5, c: 2, v: ['+2'] },
+            { s: 'Y', n: 'Itrio', r: 5, c: 3, v: ['+3'] },
+            { s: 'Zr', n: 'Zirconio', r: 5, c: 4, v: ['+4'] },
+            { s: 'Nb', n: 'Niobio', r: 5, c: 5, v: ['3, 5'] },
+            { s: 'Mo', n: 'Molibdeno', r: 5, c: 6, v: ['2, 3, 4, 5, 6'] },
+            { s: 'Tc', n: 'Tecnecio', r: 5, c: 7, v: ['4, 7'] },
+            { s: 'Ru', n: 'Rutenio', r: 5, c: 8, v: ['2, 3, 4, 6, 8'] },
+            { s: 'Rh', n: 'Rodio', r: 5, c: 9, v: ['2, 3, 4'] },
+            { s: 'Pd', n: 'Paladio', r: 5, c: 10, v: ['+2, +4'] },
+            { s: 'Ag', n: 'Plata', r: 5, c: 11, v: ['+1'] },
+            { s: 'Cd', n: 'Cadmio', r: 5, c: 12, v: ['+2'] },
+            { s: 'In', n: 'Indio', r: 5, c: 13, v: ['+3'] },
+            { s: 'Sn', n: 'Estaño', r: 5, c: 14, v: ['+2, +4'] },
+            { s: 'Sb', n: 'Antimonio', r: 5, c: 15, v: ['3, 5', '-3'] },
+            { s: 'Te', n: 'Telurio', r: 5, c: 16, v: ['2, 4, 6', '-2'] },
+            { s: 'I', n: 'Yodo', r: 5, c: 17, v: ['-1', '1, 3, 5, 7'] },
+            { s: 'Xe', n: 'Xenón', r: 5, c: 18, v: ['0'] },
+            // Periodo 6
+            { s: 'Cs', n: 'Cesio', r: 6, c: 1, v: ['+1'] },
+            { s: 'Ba', n: 'Bario', r: 6, c: 2, v: ['+2'] },
+            { s: 'Hf', n: 'Hafnio', r: 6, c: 4, v: ['+4'] },
+            { s: 'Ta', n: 'Tantalio', r: 6, c: 5, v: ['+5'] },
+            { s: 'W', n: 'Wolframio', r: 6, c: 6, v: ['2, 3, 4, 5, 6'] },
+            { s: 'Re', n: 'Renio', r: 6, c: 7, v: ['4, 6, 7'] },
+            { s: 'Os', n: 'Osmio', r: 6, c: 8, v: ['2, 3, 4, 6, 8'] },
+            { s: 'Ir', n: 'Iridio', r: 6, c: 9, v: ['2, 3, 4, 6'] },
+            { s: 'Pt', n: 'Platino', r: 6, c: 10, v: ['+2, +4'] },
+            { s: 'Au', n: 'Oro', r: 6, c: 11, v: ['+1, +3'] },
+            { s: 'Hg', n: 'Mercurio', r: 6, c: 12, v: ['+1, +2'] },
+            { s: 'Tl', n: 'Talio', r: 6, c: 13, v: ['+1, +3'] },
+            { s: 'Pb', n: 'Plomo', r: 6, c: 14, v: ['+2, +4'] },
+            { s: 'Bi', n: 'Bismuto', r: 6, c: 15, v: ['3, 5'] },
+            { s: 'Po', n: 'Polonio', r: 6, c: 16, v: ['+2, +4'] },
+            { s: 'At', n: 'Astato', r: 6, c: 17, v: ['-1', '1, 3, 5, 7'] },
+            { s: 'Rn', n: 'Radón', r: 6, c: 18, v: ['0'] },
+            // Periodo 7 (Hasta 105)
+            { s: 'Fr', n: 'Francio', r: 7, c: 1, v: ['+1'] },
+            { s: 'Ra', n: 'Radio', r: 7, c: 2, v: ['+2'] },
+            { s: 'Rf', n: 'Rutherfordio', r: 7, c: 4, v: ['+4'] },
+            { s: 'Db', n: 'Dubnio', r: 7, c: 5, v: ['+5'] }
+        ];
+
+        const tiles = [
+            '+1', '+2', '+3', '+4', '+5', '2, 4', '3, 5', '2, 4, 6', 
+            '-1', '-2', '-3', '-4', '1, 3, 5, 7', '1, 3, 5', '0', 
+            '+2, +3', '+1, +2', '+2, +4', '+1, +3', '2, 3, 4', '2, 3, 4, 5', 
+            '2, 3, 6', '2, 3, 4, 6, 7', '2, 3, 4, 5, 6', '4, 7', '4, 6, 7', 
+            '2, 3, 4, 6, 8', '2, 3, 4, 6'
+        ];
+
+        const tableContainer = document.getElementById('periodic-table');
+        const bankContainer = document.getElementById('valence-bank');
+        const scoreDisplay = document.getElementById('score-display');
+        const failCountEl = document.getElementById('fail-count');
+        const btnQuiz = document.getElementById('btn-quiz');
+        const gameStatus = document.getElementById('game-status');
+        
+        let quizMode = false;
+        let failCount = 0;
+        let activeQuizElements = [];
+
+        function initTable(filterSymbols = null) {
+            tableContainer.innerHTML = '';
+            for (let c = 1; c <= 18; c++) {
+                const h = document.createElement('div');
+                h.className = 'column-header';
+                h.innerText = c;
+                tableContainer.appendChild(h);
+            }
+
+            for (let r = 1; r <= 7; r++) {
+                for (let c = 1; c <= 18; c++) {
+                    const el = elements.find(e => e.r === r && e.c === c);
+                    const isTarget = el && (filterSymbols === null || filterSymbols.includes(el.s));
+
+                    if (isTarget) {
+                        const div = document.createElement('div');
+                        div.className = 'element-card';
+                        div.id = `el-${el.s}`;
+                        div.dataset.valences = JSON.stringify(el.v);
+                        div.dataset.found = JSON.stringify([]);
+
+                        div.innerHTML = `
+                            <span class="font-bold text-sm leading-none">${el.s}</span>
+                            <span class="text-[0.4rem] text-center leading-tight text-slate-400">${el.n}</span>
+                            <div class="correct-valence-container"></div>
+                        `;
+                        
+                        div.addEventListener('dragover', e => { e.preventDefault(); div.classList.add('drag-over'); });
+                        div.addEventListener('dragleave', () => div.classList.remove('drag-over'));
+                        div.addEventListener('drop', e => {
+                            e.preventDefault();
+                            div.classList.remove('drag-over');
+                            checkValence(div, e.dataTransfer.getData('text/plain'));
+                        });
+
+                        tableContainer.appendChild(div);
+                    } else {
+                        const empty = document.createElement('div');
+                        empty.className = 'empty-cell';
+                        tableContainer.appendChild(empty);
+                    }
+                }
+            }
+        }
+
+        function initBank() {
+            bankContainer.innerHTML = '';
+            const uniqueTiles = [...new Set(tiles)].sort(() => Math.random() - 0.5);
+            uniqueTiles.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'valence-tile';
+                div.draggable = true;
+                div.innerText = t;
+                div.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain', t));
+                bankContainer.appendChild(div);
+            });
+        }
+
+        function checkValence(target, val) {
+            const required = JSON.parse(target.dataset.valences);
+            const found = JSON.parse(target.dataset.found);
+
+            if (required.includes(val) && !found.includes(val)) {
+                found.push(val);
+                target.dataset.found = JSON.stringify(found);
+                
+                const container = target.querySelector('.correct-valence-container');
+                const tag = document.createElement('span');
+                tag.className = 'correct-valence-tag';
+                tag.innerText = val;
+                container.appendChild(tag);
+                
+                target.classList.add('correct');
+                checkQuizCompletion();
+            } else if (!required.includes(val)) {
+                // Tailwind classes actualizadas para fondo oscuro
+                target.classList.add('bg-red-900', 'border-red-500');
+                failCount++;
+                failCountEl.innerText = failCount;
+                setTimeout(() => target.classList.remove('bg-red-900', 'border-red-500'), 400);
+            }
+        }
+
+        function checkQuizCompletion() {
+            if (!quizMode) return;
+            const allDone = activeQuizElements.every(s => {
+                const target = document.getElementById(`el-${s}`);
+                const found = JSON.parse(target.dataset.found);
+                const required = JSON.parse(target.dataset.valences);
+                return required.length === found.length;
+            });
+            if (allDone) {
+                gameStatus.innerText = "¡Excelente! Has completado el ejercicio.";
+                gameStatus.className = "text-emerald-400 font-bold text-xl mt-1";
+            }
+        }
+
+        function toggleQuizMode() {
+            if (!quizMode) {
+                const count = parseInt(document.getElementById('quiz-count').value) || 15;
+                const shuffled = [...elements].sort(() => Math.random() - 0.5);
+                activeQuizElements = shuffled.slice(0, count).map(e => e.s);
+                quizMode = true;
+                failCount = 0;
+                failCountEl.innerText = "0";
+                scoreDisplay.classList.remove('hidden');
+                btnQuiz.innerText = "Ver Tabla Completa";
+                btnQuiz.className = "px-4 py-1.5 bg-slate-700 text-white rounded font-bold uppercase text-xs hover:bg-slate-600 transition";
+                gameStatus.innerText = `Modo Ejercicio: Coloca las valencias para estos ${count} elementos en sus posiciones reales.`;
+                gameStatus.className = "text-indigo-400 font-bold mt-1";
+                initTable(activeQuizElements);
+            } else {
+                quizMode = false;
+                scoreDisplay.classList.add('hidden');
+                btnQuiz.innerText = "Modo Ejercicio";
+                btnQuiz.className = "px-4 py-1.5 bg-indigo-600 text-white rounded font-bold uppercase text-xs hover:bg-indigo-500 transition";
+                gameStatus.innerText = "Completa la tabla periódica con sus números de oxidación más comunes.";
+                gameStatus.className = "text-slate-400 mt-1";
+                initTable();
+            }
+            initBank();
+        }
+
+        document.getElementById('show-answers').addEventListener('click', () => {
+            const targets = quizMode ? activeQuizElements : elements.map(e => e.s);
+            targets.forEach(s => {
+                const target = document.getElementById(`el-${s}`);
+                if (target) {
+                    const required = JSON.parse(target.dataset.valences);
+                    const container = target.querySelector('.correct-valence-container');
+                    container.innerHTML = '';
+                    required.forEach(v => {
+                        const tag = document.createElement('span');
+                        tag.className = 'correct-valence-tag';
+                        tag.innerText = v;
+                        container.appendChild(tag);
+                    });
+                    target.dataset.found = JSON.stringify(required);
+                    target.classList.add('correct');
+                }
+            });
+            if (quizMode) checkQuizCompletion();
+        });
+
+        btnQuiz.addEventListener('click', toggleQuizMode);
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            if (quizMode) {
+                failCount = 0;
+                failCountEl.innerText = "0";
+                initTable(activeQuizElements);
+            } else {
+                initTable();
+            }
+            initBank();
+        });
+
+        window.onload = () => { initTable(); initBank(); };
+    </script>
+</body>
+</html>

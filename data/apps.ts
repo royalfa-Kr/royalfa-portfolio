@@ -23,7 +23,7 @@ export const appsData: AppItem[] = [
     subject: "Química",
     status: "Publicada",
     isExternal: false,
-    url: "/apps/estructura-atomica",
+    url: "/apps/educativas/estructura-atomica",
     techStack: ["Next.js", "React", "Química"]
   },
   {
@@ -34,7 +34,7 @@ export const appsData: AppItem[] = [
     subject: "Matemáticas",
     status: "Publicada",
     isExternal: false,
-    url: "/apps/venn",
+    url: "/apps/educativas/venn",
     techStack: ["Next.js", "Lógica Matemática"]
   },
   {
@@ -45,7 +45,7 @@ export const appsData: AppItem[] = [
     subject: "Matemáticas",
     status: "Publicada",
     isExternal: false,
-    url: "/apps/memorama-geometrico",
+    url: "/apps/educativas/memorama-geometrico",
     techStack: ["Next.js", "React", "Geometría"]
   },
   {
@@ -56,7 +56,7 @@ export const appsData: AppItem[] = [
     subject: "Lógica",
     status: "Publicada",
     isExternal: false,
-    url: "/apps/tablas-verdad",
+    url: "/apps/educativas/tablas-verdad",
     techStack: ["Next.js", "React", "Lógica"]
   },
   {
@@ -69,6 +69,17 @@ export const appsData: AppItem[] = [
     isExternal: false,
     url: "/apps/educativas/celula",
     techStack: ["Next.js", "React", "Biología"]
+  },
+  {
+    id: "valencias",
+    title: "Valencias Pro",
+    description: "Rompecabezas interactivo de la tabla periódica. Arrastra y coloca los números de oxidación más comunes en su elemento correspondiente. Diseñado sin ayudas visuales para maximizar la retención.",
+    category: "educativas",
+    subject: "Química",
+    status: "Publicada",
+    isExternal: false,
+    url: "/valencias.html",
+    techStack: ["HTML", "JavaScript", "Química"]
   },
   {
     id: "legendary-tracker",
