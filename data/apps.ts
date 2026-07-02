@@ -4,6 +4,7 @@ export type AppStatus = 'Publicada' | 'Fase 1 (Prueba)' | 'En desarrollo' | 'Con
 export interface AppItem {
   id: string;
   title: string;
+  tags?: string[];
   description: string;
   category: AppCategory;
   status: AppStatus; // <-- Nueva propiedad agregada
