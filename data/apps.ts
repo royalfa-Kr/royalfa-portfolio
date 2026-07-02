@@ -71,6 +71,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Biología"]
   },
   {
+    id: "legendary-tracker",
+    title: "Legendary Marvel Log",
+    description: "Bitácora de misiones para Marvel Legendary. Registra Masterminds, Schemes, fuerzas enemigas y puntuaciones de los agentes.",
+    category: "juegos",
+    subject: "Juegos de Mesa",
+    status: "En Desarrollo",
+    isExternal: false,
+    url: "/apps/juegos/MarvelLegendary",
+    techStack: ["Next.js", "React", "Local Storage"]
+  },
+  {
     id: "med-tracker",
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",
