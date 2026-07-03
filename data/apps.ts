@@ -94,6 +94,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Local Storage"]
   },
   {
+    id: "series-tracker",
+    title: "Series Tracker",
+    description: "Herramienta local para llevar el control exacto de tus series, capítulos vistos y próximos estrenos utilizando IndexedDB para funcionar 100% offline.",
+    category: "tools",
+    subject: "Productividad",
+    status: "En desarrollo", // O "En desarrollo" si prefieres marcarlo así
+    isExternal: false,
+    url: "/apps/tools/seriestracker",
+    techStack: ["Next.js", "React", "Dexie", "TVmaze API"]
+  },
+  {
     id: "med-tracker",
     title: "MediControl",
     description: "Aplicación ligera PWA diseñada para usarse en el celular y llevar el control diario de tomas médicas.",
