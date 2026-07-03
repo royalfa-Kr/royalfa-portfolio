@@ -25,7 +25,7 @@ export default function Home() {
         <ExploreCard 
           title="Investigators" 
           description="Custom character designs for Arkham Horror LCG."
-          href="/investigators"
+          href="arkham/investigators"
         />
         <ExploreCard 
           title="Books" 

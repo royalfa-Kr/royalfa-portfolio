@@ -33,11 +33,13 @@ export default function EducativasPortal() {
     return appsData.filter(app => app.category === 'educativas');
   }, []);
 
-  // 2. Extraer las materias (subjects) únicas y ordenarlas alfabéticamente
+  // 2. Extraer las materias (subjects) únicas y ordenarlas alfabéticamente estricto
   const subjects = useMemo(() => {
     const uniqueSubjects = Array.from(new Set(appsEducativas.map(app => app.subject)));
-    // Eliminamos posibles undefined/null y ordenamos alfabéticamente
-    const validSubjects = uniqueSubjects.filter(Boolean).sort();
+    // Eliminamos vacíos y ordenamos forzando las reglas del idioma (acento, etc.)
+    const validSubjects = uniqueSubjects
+      .filter(Boolean)
+      .sort((a, b) => (a as string).localeCompare(b as string, 'es', { sensitivity: 'base' }));
     return ['Todas', ...validSubjects];
   }, [appsEducativas]);
 
