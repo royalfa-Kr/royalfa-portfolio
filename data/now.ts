@@ -5,15 +5,21 @@ export const currentFocusData = [
     description: "Construyendo herramientas interactivas en React y Next.js. De laboratorios de estructura atómica a visualizadores de biología celular.",
     linkText: "Probar herramientas",
     href: "/apps",
-    priority: 10 // Alta prioridad, saldrá arriba
+    priority: 8 // Alta prioridad, saldrá arriba
   },
   {
     id: "clases-1a1",
-    title: "Clases de Ciencias",
-    description: "Asesorías personalizadas (Física, Química, Lógica, Cálculo) con apoyos visuales de renderizado en vivo y metodologías adaptables a cada estudiante.",
+    title: "Verano",
+    description: "Preparación para examenes extraordinarios. Curso de verano para reforzar conocimientos.",
     linkText: "Ver disponibilidad",
     href: "/clases",
     priority: 5 // Prioridad media, saldrá en segundo lugar
+  },
+  {
+    id: "Presencia",
+    title: "Presencia en Internet",
+    description: "Llegar a mas personas: Tener el link de la página en la bio de Instagram, X y LinkedIn. Tener un portafolio profesional.",
+    priority: 10 
   },
   {
     id: "manual-monstruos",
@@ -24,3 +30,13 @@ export const currentFocusData = [
     priority: 0 // Prioridad 0: Está en tu radar, pero NO se mostrará en la página
   }
 ];
+
+// NUEVO: Datos de tu próxima clase
+export const upcomingClass = {
+  isActive: true, // Ponlo en false si quieres ocultar la tarjeta temporalmente
+  date: "Lunes 6",
+  time: "12:00 PM",
+  subject: "Lógica",
+  topic: "Tablas de Verdad",
+  modality: "En vivo" // Puede ser "En línea" o "En vivo",
+};
