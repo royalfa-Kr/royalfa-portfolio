@@ -1,9 +1,15 @@
-"use client";
 import Link from 'next/link';
-import { Calendar, Video, MapPin } from 'lucide-react'; // Agregamos iconos para la modalidad
-import { currentFocusData, upcomingClass } from '@/data/now';
+import { Calendar, Video, MapPin } from 'lucide-react';
+import { currentFocusData } from '@/data/now'; 
+import { getAdminData } from '@/app/royAdmin/actions'; // <-- Importamos nuestra conexión a la base de datos
 
-export default function CurrentFocus() {
+// Agregamos 'async' porque ahora se conecta a internet para traer tu clase
+export default async function CurrentFocus() {
+  
+  // 1. Traemos tu próxima clase en tiempo real desde Upstash
+  const upcomingClass = await getAdminData();
+
+  // 2. Filtramos tus proyectos como siempre
   const visibleFocus = currentFocusData
     .filter(item => item.priority > 0)
     .sort((a, b) => b.priority - a.priority);
@@ -11,7 +17,7 @@ export default function CurrentFocus() {
   return (
     <div className="bg-base-surface/40 border border-base-border p-6 md:p-8 rounded-sm h-full flex flex-col">
       
-      {/* 1. TARJETA DE PRÓXIMA CLASE (Ahora está hasta arriba) */}
+      {/* TARJETA DE PRÓXIMA CLASE (Viene directo de tu celular/base de datos) */}
       {upcomingClass.isActive && (
         <div className="mb-8 p-4 border border-accent-gold/30 bg-accent-gold/5 rounded-sm flex items-start gap-4">
           <div className="bg-base-dark p-2 border border-accent-gold/20 rounded-sm text-accent-gold shrink-0 mt-1">
@@ -22,12 +28,10 @@ export default function CurrentFocus() {
               <h4 className="text-accent-gold text-[10px] font-bold uppercase tracking-widest">
                 Próxima Sesión
               </h4>
-              {/* Etiqueta de Modalidad */}
-              {/* Etiqueta de Modalidad */}
-                <span className="flex items-center gap-1 px-2 py-0.5 bg-base-dark border border-accent-gold/20 text-accent-gold rounded-sm text-[10px] uppercase tracking-wider">
-                    {upcomingClass.modality?.toLowerCase() === 'en línea' ? <Video size={10} /> : <MapPin size={10} />}
-                    {upcomingClass.modality || 'Por definir'}
-                </span>
+              <span className="flex items-center gap-1 px-2 py-0.5 bg-base-dark border border-accent-gold/20 text-accent-gold rounded-sm text-[10px] uppercase tracking-wider">
+                {upcomingClass.modality?.toLowerCase() === 'en línea' ? <Video size={10} /> : <MapPin size={10} />}
+                {upcomingClass.modality || 'Por definir'}
+              </span>
             </div>
             
             <p className="text-text-main font-semibold text-sm leading-tight">
@@ -40,7 +44,7 @@ export default function CurrentFocus() {
         </div>
       )}
 
-      {/* 2. TÍTULO Y SUBTÍTULO */}
+      {/* TÍTULO Y SUBTÍTULO */}
       <div className="mb-6">
         <h2 className="text-xl font-serif text-text-main mb-2 flex items-center gap-2">
           <span className="text-accent-gold">■</span> En el radar
@@ -50,7 +54,7 @@ export default function CurrentFocus() {
         </p>
       </div>
       
-      {/* 3. LISTA DE PROYECTOS */}
+      {/* LISTA DE PROYECTOS */}
       <div className="flex flex-col gap-6 flex-grow">
         {visibleFocus.map((item) => (
           <div key={item.id} className="group border-l-2 border-base-border pl-4 hover:border-accent-gold transition-colors">
