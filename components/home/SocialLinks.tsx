@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Twitter, MessageCircle } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
 
 export default function SocialLinks() {
   const socials = [
