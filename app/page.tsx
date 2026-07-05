@@ -30,9 +30,10 @@ export default function Home() {
         <h2 className="text-3xl font-serif text-text-main mb-8">
           El Archivo <span className="text-accent-gold">Creativo</span>
         </h2>
+        <section id="archivo-creativo" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></section>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ExploreCard title="Investigators" description="Custom character designs for Arkham Horror LCG." href="arkham/investigators" />
+          <ExploreCard title="Arkham Horror LCG" description="Custom character designs for Arkham Horror LCG." href="/arkham"   />
           <ExploreCard title="Books" description="Published anthologies and upcoming short stories." href="/books" />
           <ExploreCard title="Apps & Tools" description="Educational apps, interactive systems, and technical experiments." href="/apps" />
           <ExploreCard title="Worlds" description="Lore, maps, and artifacts from custom TTRPG settings." href="/worlds" />
