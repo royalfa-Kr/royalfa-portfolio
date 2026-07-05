@@ -3,10 +3,10 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaXTwitter } from 'react-icons/fa6
 
 export default function SocialLinks() {
   const socials = [
-    { name: 'Facebook', icon: <Facebook size={20} />, href: 'https://www.facebook.com/rodrigo.j.tomasini/', color: 'hover:text-blue-500 hover:border-blue-500' },
-    { name: 'Instagram', icon: <Instagram size={20} />, href: 'https://www.instagram.com/clases1a1/', color: 'hover:text-pink-500 hover:border-pink-500' },
-    { name: 'LinkedIn', icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/royalfa28/', color: 'hover:text-blue-400 hover:border-blue-400' },
-    { name: 'X' , icon: <Twitter size={20} />, href: 'https://twitter.com/clases1a1', color: 'hover:text-gray-300 hover:border-gray-300' },
+    { name: 'Facebook', icon: <FaFacebook size={20} />, href: 'https://www.facebook.com/rodrigo.j.tomasini/', color: 'hover:text-blue-500 hover:border-blue-500' },
+    { name: 'Instagram', icon: <FaInstagram size={20} />, href: 'https://www.instagram.com/clases1a1/', color: 'hover:text-pink-500 hover:border-pink-500' },
+    { name: 'LinkedIn', icon: <FaLinkedin size={20} />, href: 'https://www.linkedin.com/in/royalfa28/', color: 'hover:text-blue-400 hover:border-blue-400' },
+    { name: 'X' , icon: <FaXTwitter size={20} />, href: 'https://twitter.com/clases1a1', color: 'hover:text-gray-300 hover:border-gray-300' },
   ];
 
   return (
