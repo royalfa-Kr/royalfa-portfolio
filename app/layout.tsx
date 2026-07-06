@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -31,11 +32,7 @@ export default function RootLayout({
           {children}
         </main>
         {/* Footer simple integrado en el layout para Fase 1 */}
-        <footer className="border-t border-base-border py-8 text-center mt-12">
-          <p className="text-sm text-text-muted">
-            © {new Date().getFullYear()} Royalfa. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
