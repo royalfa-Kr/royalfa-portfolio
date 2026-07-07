@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <nav className="border-b border-base-border bg-base-dark/90 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo / Brand */}
+       {/* Logo / Brand */}
         <Link href="/" className="font-serif text-2xl text-accent-gold hover:text-accent-goldHover transition-colors">
           Royalfa
         </Link>

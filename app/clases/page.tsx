@@ -10,16 +10,30 @@ export default function ClasesLandingPage() {
       <header className="relative overflow-hidden border-b border-slate-800">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950 z-0"></div>
         
-        <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 relative z-10">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-10">
+          
+          {/* --- BANNER GRANDE CLASES 1A1 --- */}
+          <div className="mb-12 w-full max-w-4xl">
+            <img 
+              src="images/LogoClases1a1big.png" 
+              alt="Clases 1a1 Club de Estudio" 
+              // Usamos w-full para que se expanda, h-48/h-64 para hacerlo panorámico, 
+              // y object-cover para recortar lo sobrante sin deformar ni pixelar drásticamente.
+              className="w-full h-48 md:h-64 object-cover object-center rounded-2xl shadow-2xl shadow-blue-900/10 border border-slate-800" 
+            />
+          </div>
+
+          {/* --- ETIQUETA CON LOGO PEQUEÑO --- */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
+            <img 
+              src="images/LogoClases1a1small.png" 
+              alt="Icono Clases 1a1" 
+              className="w-5 h-5 rounded-full"
+            />
             Asesorías 1 a 1 Disponibles
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-6 leading-tight">
             Domina las ciencias exactas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">experiencia real.</span>
           </h1>
           
@@ -100,7 +114,6 @@ export default function ClasesLandingPage() {
           </div>
           
           <div className="relative">
-            {/* Aquí luego pondremos el video de YouTube o un mockup del entorno de clase */}
             <div className="aspect-video bg-slate-950 border border-slate-800 rounded-2xl flex flex-col items-center justify-center text-slate-600 shadow-2xl">
               <PlayCircle size={48} className="mb-4 opacity-50" />
               <p className="text-sm font-bold uppercase tracking-widest">Espacio para Video Destacado</p>

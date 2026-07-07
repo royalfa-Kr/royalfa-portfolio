@@ -10,10 +10,11 @@ export default function Footer() {
           
           {/* Columna 1 — Brand (Siempre primero) */}
           <div className="order-1 md:order-none flex flex-col items-start">
-            <Link href="/" className="font-serif text-2xl text-accent-gold mb-4 hover:text-accent-goldHover transition-colors">
-              Royalfa
+            <Link href="/" className="mb-4 hover:opacity-80 transition-opacity">
+              <img 
+                src="images/logoroyalfa.jpg" alt="Royalfa" className="h-24 md:h-32 object-contain" />
             </Link>
-            <p className="text-sm text-text-muted leading-relaxed">
+            <p className="text-center text-text-muted leading-relaxed">
               Stories, worlds, educational tools, and creative projects.
             </p>
           </div>
