@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="order-1 md:order-none flex flex-col items-start">
             <Link href="/" className="mb-4 hover:opacity-80 transition-opacity">
               <img 
-                src="images/logoroyalfa.jpg" alt="Royalfa" className="h-24 md:h-32 object-contain" />
+                src="images/Logoroyalfa.jpg" alt="Royalfa" className="h-24 md:h-32 object-contain" />
             </Link>
             <p className="text-center text-text-muted leading-relaxed">
               Stories, worlds, educational tools, and creative projects.
