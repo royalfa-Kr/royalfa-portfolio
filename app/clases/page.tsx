@@ -1,8 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import { BookOpen, MonitorPlay, Beaker, Calculator, Brain, Code, ArrowRight, Star, PlayCircle, MessageCircle, MapPin } from 'lucide-react';
+import { BookOpen, MonitorPlay, Beaker, Calculator, Brain, Code, ArrowRight, Star, PlayCircle, MessageCircle, MapPin, Quote, ExternalLink } from 'lucide-react';
+
+// Importamos los datos desde nuestra carpeta data
+import { casosDeExito, resenas } from '@/data/comunidad';
 
 export default function ClasesLandingPage() {
+  
+  // DATOS DE PRUEBA: Aquí vaciarás la información que te llegue del Google Forms
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30">
       
@@ -17,8 +22,6 @@ export default function ClasesLandingPage() {
             <img 
               src="images/LogoClases1a1big.png" 
               alt="Clases 1a1 Club de Estudio" 
-              // Usamos w-full para que se expanda, h-48/h-64 para hacerlo panorámico, 
-              // y object-cover para recortar lo sobrante sin deformar ni pixelar drásticamente.
               className="w-full h-48 md:h-64 object-cover object-center rounded-2xl shadow-2xl shadow-blue-900/10 border border-slate-800" 
             />
           </div>
@@ -122,7 +125,170 @@ export default function ClasesLandingPage() {
         </div>
       </section>
 
-      {/* 4. FOOTER SIMPLE */}
+      {/* 4. COMUNIDAD Y CASOS DE ÉXITO */}
+      <section id="comunidad" className="py-20 bg-slate-950 border-b border-slate-800 relative overflow-hidden">
+        {/* Decoración de fondo */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-950 to-slate-950 z-0 pointer-events-none"></div>
+        
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-950/30 border border-yellow-900/50 text-yellow-500 text-xs font-bold uppercase tracking-widest mb-4">
+              <Star size={14} className="fill-yellow-500" /> Testimonios Reales
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4">Comunidad Clases 1a1</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Mis estudiantes no solo aprueban materias, construyen carreras. Conoce a los profesionales y emprendedores que forman parte de nuestra red de excelencia.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Tarjetas de Exalumnos generadas dinámicamente */}
+            {casosDeExito.map((caso) => (
+              <div key={caso.id} className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex flex-col transition-all hover:border-blue-900/50 hover:shadow-lg hover:shadow-blue-900/10">
+                <Quote size={32} className="text-slate-800 mb-4" />
+                <p className="text-slate-300 italic text-sm leading-relaxed mb-6 flex-grow">
+                  "{caso.testimonio}"
+                </p>
+                
+                {/* Estrellas */}
+                <div className="flex gap-1 mb-6">
+                  {[...Array(caso.calificacion)].map((_, i) => (
+                    <Star key={i} size={16} className="text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+
+                <hr className="border-slate-800 mb-6" />
+
+                {/* Info del Negocio / Exalumno */}
+                <div>
+                  <h4 className="font-bold text-slate-100">{caso.nombre}</h4>
+                  
+                  {/* Agrupamos la profesión y la ubicación */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-3">
+                    <p className="text-xs text-blue-400 font-semibold">{caso.profesion}</p>
+                    
+                    {/* El nuevo indicador de ubicación */}
+                    <div className="flex items-center gap-1 text-[10px] text-slate-500 uppercase tracking-wider">
+                      <MapPin size={10} />
+                      {caso.ubicacion}
+                    </div>
+                  </div>
+
+                  
+                  <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
+                    <p className="text-sm font-semibold text-slate-200 mb-3">{caso.negocio}</p>
+                    
+                    {/* Etiquetas de Servicios */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {caso.servicios.map((servicio, index) => (
+                        <span key={index} className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
+                          {servicio}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <a href={caso.contacto} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2 px-4 rounded-lg transition-colors">
+                      Contactar negocio <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Tarjeta CTA para sumarse a la comunidad */}
+            <div className="bg-slate-950 border border-dashed border-slate-700 rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-all hover:border-blue-500/50 hover:bg-slate-900/50 group">
+              <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <BookOpen size={24} className="text-blue-400" />
+              </div>
+              <h4 className="font-bold text-slate-200 mb-2">¿Eres exalumno?</h4>
+              <p className="text-sm text-slate-400 mb-6">
+                Suma tu consultorio, agencia o emprendimiento al directorio exclusivo de la comunidad.
+              </p>
+              <a href="https://www.facebook.com/clases1a1" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center gap-2">
+                Solicitar invitación <ArrowRight size={16} />
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5. CARRUSEL DE RESEÑAS (Google Reviews) */}
+      <section className="py-16 bg-slate-900 border-b border-slate-800 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 mb-10 text-center">
+          <h3 className="text-2xl font-bold text-slate-200 mb-2">Lo que opina nuestra comunidad</h3>
+          <p className="text-slate-400 text-sm">Reseñas reales de años de experiencia transformando resultados.</p>
+        </div>
+
+        {/* Contenedor del Carrusel Animado */}
+        <div className="relative w-full flex overflow-x-hidden group">
+          
+          {/* Truco CSS para la animación infinita sin tocar tailwind.config */}
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-100%); }
+            }
+            .animate-marquee {
+              animation: marquee 35s linear infinite;
+            }
+            .group:hover .animate-marquee {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          {/* Pista del carrusel */}
+          <div className="flex w-max animate-marquee gap-6 px-3">
+            {[...resenas, ...resenas].map((resena, index) => {
+              // Verificamos si la reseña tiene texto real (y no solo espacios)
+              const tieneTexto = resena.texto && resena.texto.trim() !== "";
+
+              return (
+                <div key={index} className="w-80 md:w-96 flex-shrink-0 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col transition-colors hover:border-slate-700">
+                  
+                  {tieneTexto ? (
+                    /* DISEÑO ESTÁNDAR: Reseña con texto */
+                    <>
+                      <div className="flex gap-1 mb-3">
+                        {[...Array(resena.calificacion)].map((_, i) => (
+                          <Star key={i} size={14} className="text-yellow-500 fill-yellow-500" />
+                        ))}
+                      </div>
+                      {/* Agregamos whitespace-pre-line y quitamos las comillas "hardcodeadas" para que no se vean raras con los cortes de línea */}
+                      <p className="text-slate-300 text-sm italic mb-6 flex-grow leading-relaxed whitespace-pre-line">
+                        {resena.texto}
+                      </p>
+                      <div className="border-t border-slate-800 pt-4 mt-auto">
+                        <p className="font-bold text-slate-200 text-sm">{resena.nombre}</p>
+                        <p className="text-xs text-blue-400">{resena.contexto}</p>
+                      </div>
+                    </>
+                  ) : (
+                    /* DISEÑO SIN TEXTO: Estrellas y nombre protagonistas */
+                    <div className="flex flex-col items-center justify-center h-full flex-grow text-center gap-4">
+                      <div className="flex gap-1.5 mb-2">
+                        {[...Array(resena.calificacion)].map((_, i) => (
+                          <Star key={i} size={24} className="text-yellow-500 fill-yellow-500" />
+                        ))}
+                      </div>
+                      <div>
+                        <p className="font-black text-slate-100 text-xl mb-1">{resena.nombre}</p>
+                        {resena.contexto && (
+                          <p className="text-sm text-blue-400 font-medium">{resena.contexto}</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FOOTER SIMPLE */}
       <footer className="py-12 bg-slate-950 text-center border-t border-slate-800">
         <div className="flex justify-center items-center gap-6 mb-6">
           <a href="https://www.facebook.com/clases1a1" className="text-slate-500 hover:text-blue-500 transition-colors">
