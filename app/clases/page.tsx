@@ -16,7 +16,7 @@ export default function ClasesLandingPage() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch('/api/reviews');
+        const res = await fetch('/api/testimonios');
         if (res.ok) {
           const data = await res.json();
           if (data.length > 0) {
@@ -191,17 +191,20 @@ export default function ClasesLandingPage() {
                   </div>
                   
                   <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
-                    <p className="text-sm font-semibold text-slate-200 mb-3">{caso.negocio}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {caso.servicios.map((servicio, index) => (
-                        <span key={index} className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
-                          {servicio}
-                        </span>
-                      ))}
-                    </div>
-                    <a href={caso.contacto} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2 px-4 rounded-lg transition-colors">
+                    <p className="text-sm font-semibold text-slate-200 mb-3">{caso.negocio}</p> 
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {caso.servicios?.map((servicio, index) => (
+                      <span key={index} className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
+                        {servicio}
+                      </span>
+                    ))}
+                  </div>
+
+                  {caso.redes && caso.redes.length > 0 && (
+                    <a href={caso.redes[0].url} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2 px-4 rounded-lg transition-colors">
                       Contactar negocio <ExternalLink size={14} />
                     </a>
+                  )}
                   </div>
                 </div>
               </div>
@@ -231,8 +234,8 @@ export default function ClasesLandingPage() {
           <p className="text-slate-400 text-sm mb-6">Reseñas reales de años de experiencia transformando resultados.</p>
           
           {/* Botón para que los visitantes dejen su reseña */}
-          <Link href="/testimonio" className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg">
-            <MessageSquareQuote size={16} className="text-accent-gold" /> Dejar una reseña
+          <Link href="apps/testimonios" className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg">
+            <MessageSquareQuote size={18} className="text-accent-gold" /> Dejar una reseña
           </Link>
         </div>
 
