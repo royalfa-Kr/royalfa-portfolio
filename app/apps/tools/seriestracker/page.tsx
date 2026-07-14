@@ -56,6 +56,7 @@ export default function SeriesTracker() {
         episodesData: epData,
         network: show.network?.name || show.webChannel?.name || "Desconocido",
         nextEpisodeDate: null,
+        schedule: show.schedule || null,
         updatedAt: Date.now()
       });
       alert(`¡${show.name} añadida a tu lista!`);
@@ -109,6 +110,28 @@ export default function SeriesTracker() {
     if(confirm('¿Seguro que quieres borrar esta serie de tu lista?')) {
       await db.series.delete(serieId);
     }
+  };
+
+  // Función para formatear y traducir el horario
+  const obtenerHorario = (serie: any) => {
+    // 1. Si guardaste la fecha exacta del próximo episodio
+    if (serie.nextEpisodeDate) {
+       const fecha = new Date(serie.nextEpisodeDate);
+       return `Próx: ${fecha.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}`;
+    }
+    
+    // 2. Si tienes el horario semanal de TVmaze
+    if (serie.schedule && serie.schedule.days && serie.schedule.days.length > 0) {
+      const diasEnEspanol: { [key: string]: string } = {
+        Monday: 'Lunes', Tuesday: 'Martes', Wednesday: 'Miércoles',
+        Thursday: 'Jueves', Friday: 'Viernes', Saturday: 'Sábado', Sunday: 'Domingo'
+      };
+      const dias = serie.schedule.days.map((d: string) => diasEnEspanol[d] || d).join(', ');
+      const hora = serie.schedule.time ? ` a las ${serie.schedule.time}` : '';
+      return `${dias}${hora}`;
+    }
+
+    return "Horario por confirmar";
   };
 
   return (
@@ -203,7 +226,10 @@ export default function SeriesTracker() {
                       
                       <div className="p-4 md:p-6 flex-1 flex flex-col justify-between">
                         <div>
-                          <h3 className="text-xl font-bold text-white mb-1 pr-8">{serie.title}</h3>
+                          <h3 className="text-xl font-bold text-white pr-8">{serie.title}</h3>
+                          <p className="text-xs font-medium text-slate-400 mt-1 mb-3">
+                            🗓️ {obtenerHorario(serie)}
+                          </p>
                           
                           {/* Selector de Temporadas */}
                           <div className="flex items-center gap-3 mt-2 mb-4 bg-slate-950 border border-slate-800 w-fit px-3 py-1.5 rounded-lg">

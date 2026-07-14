@@ -1,23 +1,48 @@
-import React from 'react';
-import Link from 'next/link';
-import { BookOpen, MonitorPlay, Beaker, Calculator, Brain, Code, ArrowRight, Star, PlayCircle, MessageCircle, MapPin, Quote, ExternalLink } from 'lucide-react';
+"use client";
 
-// Importamos los datos desde nuestra carpeta data
-import { casosDeExito, resenas } from '@/data/comunidad';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { BookOpen, MonitorPlay, Beaker, Calculator, Brain, Code, ArrowRight, Star, PlayCircle, MessageCircle, MapPin, Quote, ExternalLink, MessageSquareQuote } from 'lucide-react';
+
+// Importamos tus datos locales como "respaldo"
+import { casosDeExito, resenas as resenasLocales } from '@/data/comunidad';
 
 export default function ClasesLandingPage() {
-  
-  // DATOS DE PRUEBA: Aquí vaciarás la información que te llegue del Google Forms
+  // Estado para guardar las reseñas de la base de datos
+  const [resenasDinamicas, setResenasDinamicas] = useState<any[]>([]);
+  const [usarLocales, setUsarLocales] = useState(true);
+
+  // Al cargar la página, intentamos jalar las reseñas de Upstash
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch('/api/reviews');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.length > 0) {
+            setResenasDinamicas(data);
+            setUsarLocales(false); // Si hay datos en la nube, dejamos de usar las locales
+          }
+        }
+      } catch (error) {
+        console.error("Usando reseñas locales por defecto:", error);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  // Decidimos qué lista mostrar en el carrusel
+  const resenasAMostrar = usarLocales ? resenasLocales : resenasDinamicas;
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30">
-      
+               
       {/* 1. HERO SECTION */}
       <header className="relative overflow-hidden border-b border-slate-800">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950 z-0"></div>
         
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-10">
           
-          {/* --- BANNER GRANDE CLASES 1A1 --- */}
           <div className="mb-12 w-full max-w-4xl">
             <img 
               src="images/LogoClases1a1big.png" 
@@ -26,7 +51,6 @@ export default function ClasesLandingPage() {
             />
           </div>
 
-          {/* --- ETIQUETA CON LOGO PEQUEÑO --- */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/30 border border-blue-900/50 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
             <img 
               src="images/LogoClases1a1small.png" 
@@ -127,7 +151,6 @@ export default function ClasesLandingPage() {
 
       {/* 4. COMUNIDAD Y CASOS DE ÉXITO */}
       <section id="comunidad" className="py-20 bg-slate-950 border-b border-slate-800 relative overflow-hidden">
-        {/* Decoración de fondo */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-950 to-slate-950 z-0 pointer-events-none"></div>
         
         <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -142,8 +165,6 @@ export default function ClasesLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Tarjetas de Exalumnos generadas dinámicamente */}
             {casosDeExito.map((caso) => (
               <div key={caso.id} className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex flex-col transition-all hover:border-blue-900/50 hover:shadow-lg hover:shadow-blue-900/10">
                 <Quote size={32} className="text-slate-800 mb-4" />
@@ -151,7 +172,6 @@ export default function ClasesLandingPage() {
                   "{caso.testimonio}"
                 </p>
                 
-                {/* Estrellas */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(caso.calificacion)].map((_, i) => (
                     <Star key={i} size={16} className="text-yellow-500 fill-yellow-500" />
@@ -160,26 +180,18 @@ export default function ClasesLandingPage() {
 
                 <hr className="border-slate-800 mb-6" />
 
-                {/* Info del Negocio / Exalumno */}
                 <div>
                   <h4 className="font-bold text-slate-100">{caso.nombre}</h4>
-                  
-                  {/* Agrupamos la profesión y la ubicación */}
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-3">
                     <p className="text-xs text-blue-400 font-semibold">{caso.profesion}</p>
-                    
-                    {/* El nuevo indicador de ubicación */}
                     <div className="flex items-center gap-1 text-[10px] text-slate-500 uppercase tracking-wider">
                       <MapPin size={10} />
                       {caso.ubicacion}
                     </div>
                   </div>
-
                   
                   <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
                     <p className="text-sm font-semibold text-slate-200 mb-3">{caso.negocio}</p>
-                    
-                    {/* Etiquetas de Servicios */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {caso.servicios.map((servicio, index) => (
                         <span key={index} className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
@@ -187,7 +199,6 @@ export default function ClasesLandingPage() {
                         </span>
                       ))}
                     </div>
-                    
                     <a href={caso.contacto} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2 px-4 rounded-lg transition-colors">
                       Contactar negocio <ExternalLink size={14} />
                     </a>
@@ -209,22 +220,23 @@ export default function ClasesLandingPage() {
                 Solicitar invitación <ArrowRight size={16} />
               </a>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* 4.5. CARRUSEL DE RESEÑAS (Google Reviews) */}
-      <section className="py-16 bg-slate-900 border-b border-slate-800 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 mb-10 text-center">
+      {/* 4.5. CARRUSEL DE RESEÑAS (Conectado a Upstash / Local) */}
+      <section id="resenas" className="py-16 bg-slate-900 border-b border-slate-800 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 mb-10 text-center flex flex-col items-center">
           <h3 className="text-2xl font-bold text-slate-200 mb-2">Lo que opina nuestra comunidad</h3>
-          <p className="text-slate-400 text-sm">Reseñas reales de años de experiencia transformando resultados.</p>
+          <p className="text-slate-400 text-sm mb-6">Reseñas reales de años de experiencia transformando resultados.</p>
+          
+          {/* Botón para que los visitantes dejen su reseña */}
+          <Link href="/testimonio" className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg">
+            <MessageSquareQuote size={16} className="text-accent-gold" /> Dejar una reseña
+          </Link>
         </div>
 
-        {/* Contenedor del Carrusel Animado */}
         <div className="relative w-full flex overflow-x-hidden group">
-          
-          {/* Truco CSS para la animación infinita sin tocar tailwind.config */}
           <style>{`
             @keyframes marquee {
               0% { transform: translateX(0%); }
@@ -238,49 +250,41 @@ export default function ClasesLandingPage() {
             }
           `}</style>
           
-          {/* Pista del carrusel */}
-          <div className="flex w-max animate-marquee gap-6 px-3">
-            {[...resenas, ...resenas].map((resena, index) => {
-              // Verificamos si la reseña tiene texto real (y no solo espacios)
+          <div className="flex w-max animate-marquee gap-6 px-3 mt-4">
+            {/* Usamos resenasAMostrar que ya decide si usar BD o Locales */}
+            {[...resenasAMostrar, ...resenasAMostrar].map((resena, index) => {
               const tieneTexto = resena.texto && resena.texto.trim() !== "";
 
               return (
                 <div key={index} className="w-80 md:w-96 flex-shrink-0 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col transition-colors hover:border-slate-700">
-                  
                   {tieneTexto ? (
-                    /* DISEÑO ESTÁNDAR: Reseña con texto */
                     <>
                       <div className="flex gap-1 mb-3">
-                        {[...Array(resena.calificacion)].map((_, i) => (
+                        {[...Array(resena.calificacion || 5)].map((_, i) => (
                           <Star key={i} size={14} className="text-yellow-500 fill-yellow-500" />
                         ))}
                       </div>
-                      {/* Agregamos whitespace-pre-line y quitamos las comillas "hardcodeadas" para que no se vean raras con los cortes de línea */}
                       <p className="text-slate-300 text-sm italic mb-6 flex-grow leading-relaxed whitespace-pre-line">
                         {resena.texto}
                       </p>
                       <div className="border-t border-slate-800 pt-4 mt-auto">
                         <p className="font-bold text-slate-200 text-sm">{resena.nombre}</p>
-                        <p className="text-xs text-blue-400">{resena.contexto}</p>
+                        {resena.contexto && <p className="text-xs text-blue-400">{resena.contexto}</p>}
                       </div>
                     </>
                   ) : (
-                    /* DISEÑO SIN TEXTO: Estrellas y nombre protagonistas */
                     <div className="flex flex-col items-center justify-center h-full flex-grow text-center gap-4">
                       <div className="flex gap-1.5 mb-2">
-                        {[...Array(resena.calificacion)].map((_, i) => (
+                        {[...Array(resena.calificacion || 5)].map((_, i) => (
                           <Star key={i} size={24} className="text-yellow-500 fill-yellow-500" />
                         ))}
                       </div>
                       <div>
                         <p className="font-black text-slate-100 text-xl mb-1">{resena.nombre}</p>
-                        {resena.contexto && (
-                          <p className="text-sm text-blue-400 font-medium">{resena.contexto}</p>
-                        )}
+                        {resena.contexto && <p className="text-sm text-blue-400 font-medium">{resena.contexto}</p>}
                       </div>
                     </div>
                   )}
-
                 </div>
               );
             })}
@@ -289,7 +293,7 @@ export default function ClasesLandingPage() {
       </section>
 
       {/* 5. FOOTER SIMPLE */}
-      <footer className="py-12 bg-slate-950 text-center border-t border-slate-800">
+      <footer id="contacto" className="py-12 bg-slate-950 text-center border-t border-slate-800">
         <div className="flex justify-center items-center gap-6 mb-6">
           <a href="https://www.facebook.com/clases1a1" className="text-slate-500 hover:text-blue-500 transition-colors">
             <MessageCircle size={24} />

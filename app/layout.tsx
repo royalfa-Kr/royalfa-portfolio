@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import NavbarSwitcher from "@/components/layout/NavbarSwitcher";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -26,13 +25,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen flex flex-col">
-        <Navbar />
+      <body className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
+        {/* El selector decidirá de forma automática cuál de los dos menús renderizar */}
+        <NavbarSwitcher />
         <main className="flex-grow">
           {children}
         </main>
-        {/* Footer simple integrado en el layout para Fase 1 */}
-        <Footer />
+        <footer className="border-t border-base-border py-8 text-center mt-12">
+          <p className="text-sm text-text-muted">
+            © {new Date().getFullYear()} Royalfa. All rights reserved.
+          </p>
+        </footer>
       </body>
     </html>
   );

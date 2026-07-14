@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="order-2 md:order-3">
             <h3 className="text-sm uppercase tracking-wider text-text-main font-semibold mb-4">Work With Me</h3>
             <ul className="space-y-3">
-              <li><Link href="/clases" className="text-sm text-text-muted hover:text-accent-gold transition-colors">1:1 Science Classes</Link></li>
+              <li><Link href="/clases" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Clases 1a1</Link></li>
               <li><Link href="/apps" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Educational Apps</Link></li>
               <li><Link href="/contact" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Custom Development</Link></li>
               <li><Link href="/contact" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Contact</Link></li>
@@ -37,7 +37,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><Link href="/about" className="text-sm text-text-muted hover:text-accent-gold transition-colors">About</Link></li>
               <li><Link href="/projects" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Projects</Link></li>
-              <li><Link href="/books" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Books</Link></li>
+              <li><Link href="/books" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Libros</Link></li>
               <li><Link href="/apps" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Apps</Link></li>
               <li><Link href="/arkham" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Investigators</Link></li>
               <li><Link href="/worlds" className="text-sm text-text-muted hover:text-accent-gold transition-colors">Worlds</Link></li>

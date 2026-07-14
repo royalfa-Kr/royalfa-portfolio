@@ -1,4 +1,70 @@
-import GoogleReviews from '@/components/home/GoogleReviews';
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { Star, MessageSquareQuote } from 'lucide-react';
+
+// Componente interno para mostrar 2 reseñas aleatorias de la Base de Datos
+function RandomReviews() {
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch('/api/reviews');
+        if (res.ok) {
+          const data = await res.json();
+          // Revolver el arreglo al azar y tomar solo 2
+          const shuffled = data.sort(() => 0.5 - Math.random());
+          setReviews(shuffled.slice(0, 2));
+        }
+      } catch (error) {
+        console.error("Error cargando reseñas en About:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="animate-pulse space-y-4">
+        <div className="h-40 bg-slate-800/20 border border-base-border/30 rounded-xl"></div>
+        <div className="h-40 bg-slate-800/20 border border-base-border/30 rounded-xl"></div>
+      </div>
+    );
+  }
+
+  // Si no hay reseñas en la base de datos aún, no mostramos nada para no romper el diseño
+  if (reviews.length === 0) return null;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2 text-accent-gold mb-6">
+        <MessageSquareQuote size={20} />
+        <h3 className="text-lg font-serif font-bold text-text-main">Lo que dice la comunidad</h3>
+      </div>
+      
+      {reviews.map((resena, idx) => (
+        <div key={idx} className="bg-slate-950/50 border border-base-border/50 p-6 rounded-2xl relative">
+          <div className="flex gap-1 mb-3 text-accent-gold">
+            {[...Array(resena.calificacion || 5)].map((_, i) => (
+              <Star key={i} size={14} fill="currentColor" />
+            ))}
+          </div>
+          <p className="text-text-muted text-sm italic mb-4 whitespace-pre-line leading-relaxed">
+            "{resena.texto}"
+          </p>
+          <div>
+            <p className="text-text-main font-bold text-sm">{resena.nombre}</p>
+            {resena.contexto && <p className="text-slate-500 text-xs">{resena.contexto}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -17,7 +83,6 @@ export default function AboutPage() {
         {/* COLUMNA IZQUIERDA: Biografía + Habilidades */}
         <div className="md:col-span-2 space-y-10">
           
-          {/* Tu texto */}
           <div className="space-y-6 text-text-muted leading-relaxed">
             <p className="text-lg text-text-main">
               Royalfa es el espacio donde la vocación docente, el pensamiento analítico y el diseño narrativo convergen.
@@ -33,7 +98,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Tus Habilidades debajo del texto (a 2 columnas) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-base-border/30">
             <div>
               <h3 className="text-sm uppercase tracking-wider text-accent-gold font-semibold mb-4">Academic & Tech</h3>
@@ -57,10 +121,10 @@ export default function AboutPage() {
 
         </div>
 
-        {/* COLUMNA DERECHA: Solo Reseñas (Con efecto sticky para que bajen contigo) */}
+        {/* COLUMNA DERECHA: Solo Reseñas (Con efecto sticky) */}
         <div className="md:col-span-1">
-          <div className="sticky top-8 pt-2">
-            <GoogleReviews />
+          <div className="sticky top-24 pt-2">
+            <RandomReviews />
           </div>
         </div>
 

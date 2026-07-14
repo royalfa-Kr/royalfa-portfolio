@@ -12,6 +12,7 @@ export interface Serie {
   episodesData: any[]; // Guardamos todos los episodios para leer las reseñas offline
   network: string;
   nextEpisodeDate: string | null;
+  schedule?: any;
   updatedAt: number;
 }
 
