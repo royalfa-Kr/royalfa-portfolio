@@ -1,6 +1,8 @@
 import { Redis } from '@upstash/redis';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Conexión automática usando las variables de entorno de Vercel/Local
 const redis = Redis.fromEnv();
 
