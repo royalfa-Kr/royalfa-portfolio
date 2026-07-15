@@ -256,7 +256,7 @@ export default function ClasesLandingPage() {
               animation-play-state: paused;
             }
           `}</style>
-          
+
           <div className="flex w-max animate-marquee gap-6 px-3 mt-4">
             {/* Iteramos directamente sobre nuestro estado que ya combinó ambas listas */}
             {[...resenasDinamicas, ...resenasDinamicas].map((resena, index) => {
