@@ -42,7 +42,7 @@ export default function ClasesNav() {
               <MonitorPlay size={16} /> <span className="hidden md:inline">Apps Educativas</span>
             </Link>
             
-            <Link href="/apps/testimonios" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 hover:text-accent-gold hover:bg-slate-900 rounded-lg transition-all whitespace-nowrap">
+            <Link href="#resenas" className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 hover:text-accent-gold hover:bg-slate-900 rounded-lg transition-all whitespace-nowrap">
               <MessageSquareQuote size={16} /> <span className="hidden md:inline">Reseñas</span>
             </Link>
 

@@ -8,31 +8,35 @@ import { BookOpen, MonitorPlay, Beaker, Calculator, Brain, Code, ArrowRight, Sta
 import { casosDeExito, resenas as resenasLocales } from '@/data/comunidad';
 
 export default function ClasesLandingPage() {
-  // Estado para guardar las reseñas de la base de datos
-  const [resenasDinamicas, setResenasDinamicas] = useState<any[]>([]);
-  const [usarLocales, setUsarLocales] = useState(true);
+  
+  // Estado para guardar las reseñas de la base de datos + las locales
+      const [resenasDinamicas, setResenasDinamicas] = useState<any[]>(resenasLocales);
 
-  // Al cargar la página, intentamos jalar las reseñas de Upstash
+  // Efecto para buscar las reseñas de Upstash al cargar la página
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch('/api/testimonios');
+        // En tu proyecto real, usa '/apps/api/testimonios'. 
+        // Aquí uso una URL simulada para que el visor de React no de error 404
+        const apiUrl = typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+          ? '/apps/api/testimonios' 
+          : 'https://jsonplaceholder.typicode.com/posts/1'; // Simulador inofensivo
+          
+        const res = await fetch(apiUrl);
         if (res.ok) {
           const data = await res.json();
-          if (data.length > 0) {
-            setResenasDinamicas(data);
-            setUsarLocales(false); // Si hay datos en la nube, dejamos de usar las locales
+          // Verificamos que Upstash nos devolvió un arreglo con datos
+          if (Array.isArray(data) && data.length > 0) {
+            // Combinamos las nuevas con las viejas
+            setResenasDinamicas([...data, ...resenasLocales]);
           }
         }
       } catch (error) {
-        console.error("Usando reseñas locales por defecto:", error);
+        console.error("Usando solo reseñas locales:", error);
       }
     };
     fetchReviews();
   }, []);
-
-  // Decidimos qué lista mostrar en el carrusel
-  const resenasAMostrar = usarLocales ? resenasLocales : resenasDinamicas;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30">
@@ -43,8 +47,8 @@ export default function ClasesLandingPage() {
         
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-10">
           
-          <div className="mb-12 w-full max-w-4xl">
-            <img 
+          <div className="mb-12 w-full max-w-4xl bg-slate-900 h-48 md:h-64 rounded-2xl border border-slate-800 flex items-center justify-center text-slate-600 font-bold uppercase tracking-widest shadow-2xl shadow-blue-900/10">
+             <img 
               src="images/LogoClases1a1big.png" 
               alt="Clases 1a1 Club de Estudio" 
               className="w-full h-48 md:h-64 object-cover object-center rounded-2xl shadow-2xl shadow-blue-900/10 border border-slate-800" 
@@ -165,7 +169,7 @@ export default function ClasesLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {casosDeExito.map((caso) => (
+            {casosDeExito.map((caso: any) => (
               <div key={caso.id} className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 flex flex-col transition-all hover:border-blue-900/50 hover:shadow-lg hover:shadow-blue-900/10">
                 <Quote size={32} className="text-slate-800 mb-4" />
                 <p className="text-slate-300 italic text-sm leading-relaxed mb-6 flex-grow">
@@ -193,7 +197,7 @@ export default function ClasesLandingPage() {
                   <div className="bg-slate-950 rounded-xl p-4 border border-slate-800">
                     <p className="text-sm font-semibold text-slate-200 mb-3">{caso.negocio}</p> 
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {caso.servicios?.map((servicio, index) => (
+                    {caso.servicios?.map((servicio: string, index: number) => (
                       <span key={index} className="text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 px-2 py-1 rounded">
                         {servicio}
                       </span>
@@ -254,8 +258,8 @@ export default function ClasesLandingPage() {
           `}</style>
           
           <div className="flex w-max animate-marquee gap-6 px-3 mt-4">
-            {/* Usamos resenasAMostrar que ya decide si usar BD o Locales */}
-            {[...resenasAMostrar, ...resenasAMostrar].map((resena, index) => {
+            {/* Iteramos directamente sobre nuestro estado que ya combinó ambas listas */}
+            {[...resenasDinamicas, ...resenasDinamicas].map((resena, index) => {
               const tieneTexto = resena.texto && resena.texto.trim() !== "";
 
               return (
