@@ -32,6 +32,18 @@ export const casosDeExito = [
     ]
   },
   {
+    id: 4,
+    nombre: "Lic. Alison Rosete Orozco", 
+    profesion: " ",
+    ubicacion: "CDMX, México",
+    negocio: "Economía y Relaciones Internacionales",
+    logo: "",
+    testimonio: "Clases 1a1 formaron parte de mi educación y pensamiento matemático desde primaria hasta preparatoria.",
+    calificacion: 5,
+    servicios: [],
+    redes: [ ]
+  },
+  {
     id: 3,
     nombre: "Fernando Gómez",
     profesion: " ",

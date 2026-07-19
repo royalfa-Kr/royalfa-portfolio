@@ -12,7 +12,7 @@ export const currentFocusData = [
     title: "Summer Camp 2026",
     description: "Escribiendo articulos de ficción y lore para el universo de Daimon. Cada artículo es un prompt que exploro y desarrollo.",
     linkText: "Lee los nuevos artículos",
-    href: "/mundos",
+    href: "/worlds",
     priority: 5 // Prioridad media, saldrá en segundo lugar
   },
   {
