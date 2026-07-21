@@ -6,19 +6,19 @@ import { LucideInfo, LucideDna, LucideMousePointer2, LucideCheckCircle, LucideX,
 // Coordenadas recalibradas y textos enriquecidos con formas y colores
 const ORGANELLES_DATA = {
   animal: [
-    { id: 'nucleus', name: 'Núcleo', color: '#FF55FF', info: 'Centro de control que contiene el ADN. Forma una gran esfera central (color rosa fuerte).', top: '30%', left: '55%' },
+    { id: 'nucleus', name: 'Núcleo', color: '#FF55FF', info: 'Alberga el ADN y controla todas las funciones de la célula. Forma una gran esfera central (color rosa fuerte).', top: '30%', left: '55%' },
     { id: 'nucleolus', name: 'Nucleolo', color: '#FFFF00', info: 'Estructura densa dentro del núcleo que fabrica ribosomas. Es la pequeña esfera brillante en su interior (color amarillo).', top: '38%', left: '62%' },
-    { id: 'er', name: 'Retículo Endoplasmático', color: '#00AAFF', info: 'Sintetiza proteínas. Parece un laberinto de túbulos plegados que abraza al núcleo (estructuras verdes alrededor del rosa).', top: '35%', left: '40%' },
+    { id: 'er', name: 'Retículo Endoplasmático', color: '#00AAFF', info: 'El Rugoso (con ribosomas) sintetiza y transporta proteínas; el Liso sintetiza lípidos. Parece un laberinto de túbulos plegados que abraza al núcleo (estructuras verdes alrededor del rosa).', top: '35%', left: '40%' },
     { id: 'mitochondria', name: 'Mitocondria', color: '#FF8800', info: 'La central energética (produce ATP). Tienen forma de frijol u óvalo con una línea en zigzag adentro (color rosa con amarillo).', top: '67%', left: '30%' },
-    { id: 'golgi', name: 'Aparato de Golgi', color: '#FFDD00', info: 'Empaqueta y distribuye proteínas. Parece una pila de sacos curvos aplanados, apilados unos sobre otros (color naranja abajo).', top: '80%', left: '50%' },
-    { id: 'lysosome', name: 'Lisosoma', color: '#FF4444', info: 'Vesículas de limpieza celular. Son los pequeños círculos dispersos por la célula (color naranja claro/amarillo).', top: '46%', left: '25%' },
+    { id: 'golgi', name: 'Aparato de Golgi', color: '#FFDD00', info: 'Modifica, empaqueta y distribuye proteínas y lípidos. Parece una pila de sacos curvos aplanados, apilados unos sobre otros (color naranja abajo).', top: '80%', left: '50%' },
+    { id: 'lysosome', name: 'Lisosoma', color: '#FF4444', info: 'Contienen enzimas digestivas para degradar desechos y reciclar estructuras. Son los pequeños círculos dispersos por la célula (color naranja claro/amarillo).', top: '46%', left: '25%' },
   ],
   plant: [
     { id: 'cell_wall', name: 'Pared Celular', color: '#22AA55', info: 'Capa externa que da soporte. Es el contorno más grueso y rígido que rodea toda la célula (color verde oscuro exterior).', top: '15%', left: '10%' },
-    { id: 'nucleus', name: 'Núcleo', color: '#FF55FF', info: 'Almacena la información genética. Es la gran esfera desplazada hacia un costado (color morado/lila).', top: '25%', left: '70%' },
+    { id: 'nucleus', name: 'Núcleo', color: '#FF55FF', info: 'Alberga el ADN y controla todas las funciones de la célula. Es la gran esfera desplazada hacia un costado (color morado/lila).', top: '25%', left: '70%' },
     { id: 'vacuole', name: 'Vacuola Central', color: '#44CCFF', info: 'Almacena agua y da presión. Es la enorme bolsa que ocupa casi todo el centro de la célula (color azul claro).', top: '55%', left: '45%' },
     { id: 'chloroplast', name: 'Cloroplasto', color: '#00FF66', info: 'Lugar de la fotosíntesis. Son óvalos con estructuras que parecen pilas de monedas adentro (color verde brillante). NOTA: Hay varios dispersos.', top: '79%', left: '29%' },
-    { id: 'mitochondria', name: 'Mitocondria', color: '#FF8800', info: 'Produce energía celular. Tiene forma de frijol con pliegues internos (color fucsia/rojo con amarillo).', top: '61%', left: '80%' },
+    { id: 'mitochondria', name: 'Mitocondria', color: '#FF8800', info: 'Generan energía (ATP) a través de la respiración celular. (color fucsia/rojo con amarillo).', top: '61%', left: '80%' },
   ]
 };
 

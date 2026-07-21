@@ -102,7 +102,18 @@ export const appsData: AppItem[] = [
     status: "En desarrollo", // O "En desarrollo" si prefieres marcarlo así
     isExternal: false,
     url: "/apps/tools/seriestracker",
-    techStack: ["Next.js", "React", "Dexie", "TVmaze API"]
+    techStack: ["Next.js", "React", "Física", "IndexedDB"]
+  },
+  {
+    id: "SMD",
+    title: "Sistema Métrico Decimal",
+    description: "Herramienta interactiva para convertir unidades de longitud, masa y capacidad en el Sistema Métrico Decimal.",
+    category: "educativas",
+    subject: "Física",
+    status: "Publicada", // O "En desarrollo" si prefieres marcarlo así
+    isExternal: false,
+    url: "/apps/educativas/SMD",
+    techStack: ["Next.js", "React", "Física"]
   },
   {
     id: "med-tracker",
