@@ -10,7 +10,7 @@ export const summerCamp2026 = {
   eventoActivo: true,
   nombreEvento: "Summer Camp 2026",
   metaArticulos: 30,
-  articulosCompletados: 2, 
+  articulosCompletados: 3, 
   nivelEnProgreso: "Cobre",
   
   articulos: [
@@ -35,6 +35,17 @@ export const summerCamp2026 = {
       bgIcono: "bg-purple-950/30",
       bordeIcono: "border-purple-900/50",
       url: "https://www.worldanvil.com/w/daimon-royalfa/a/hidden-mirror-cult-organization" // CAMBIA ESTO por tu link real
+    },
+      {
+      id: 3,
+      titulo: "The Daughter of the Artificer",
+      prompt: "Person: A fictional character some believe to be real",
+      extracto: " Revered by the Hidden Mirror Cult as the child of the Creator, the Daughter embodies comfort, belonging, and surrender—though ancient sources suggest she may be the reflection of a dream rather than a life once lived.",
+      icono: ScrollText,
+      color: "text-purple-400",
+      bgIcono: "bg-purple-950/30",
+      bordeIcono: "border-purple-900/50",
+      url: "https://www.worldanvil.com/w/daimon-royalfa/a/the-daughter-of-the-artificer-person" // CAMBIA ESTO por tu link real
     }
     // Para agregar el tercer artículo, solo copia un bloque de arriba, ponle id: 3, 
     // y llena los datos. Automáticamente aparecerá en la página.

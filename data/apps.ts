@@ -66,7 +66,7 @@ export const appsData: AppItem[] = [
     description: "Diagrama interactivo 2D para explorar y evaluar el conocimiento de los organelos en células animales y vegetales. Incluye modo de estudio y evaluación.",
     category: "educativas",
     subject: "Biología",
-    status: "Publicada",
+    status: "En desarrollo",
     isExternal: false,
     url: "/apps/educativas/celula",
     techStack: ["Next.js", "React", "Biología"]
