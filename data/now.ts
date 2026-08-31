@@ -8,14 +8,6 @@ export const currentFocusData = [
     priority: 8 // Alta prioridad, saldrá arriba
   },
   {
-    id: "mundos",
-    title: "Summer Camp 2026",
-    description: "Escribiendo articulos de ficción y lore para el universo de Daimon. Cada artículo es un prompt que exploro y desarrollo.",
-    linkText: "Lee los nuevos artículos",
-    href: "/worlds",
-    priority: 5 // Prioridad media, saldrá en segundo lugar
-  },
-  {
     id: "Presencia",
     title: "Presencia en Internet",
     description: "Llegar a mas personas: Tener el link de la página en la bio de Instagram, X y LinkedIn. Tener un portafolio profesional.",

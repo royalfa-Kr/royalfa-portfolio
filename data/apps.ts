@@ -83,6 +83,17 @@ export const appsData: AppItem[] = [
     techStack: ["HTML", "JavaScript", "Química"]
   },
   {
+    id: "Simbolos",
+    title: "Nombres y Símbolos Químicos",
+    description: "Juego de memoria para emparejar nombres y símbolos químicos. Diseñado para reforzar la memorización de los elementos de la tabla periódica.",
+    category: "educativas",
+    subject: "Química",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/quimica/simbolos",
+    techStack: ["Next.js", "React", "Química"]
+  },
+  {
     id: "legendary-tracker",
     title: "Legendary Marvel Log",
     description: "Bitácora de misiones para Marvel Legendary. Registra Masterminds, Schemes, fuerzas enemigas y puntuaciones de los agentes.",

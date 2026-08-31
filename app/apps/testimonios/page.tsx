@@ -30,7 +30,7 @@ export default function TestimonioForm() {
       return;
     }
     if (formData.texto.length < 5) {
-      setError('El testimonio debe ser un poco más largo (mínimo 20 caracteres) para que sea de utilidad.');
+      setError('El testimonio debe ser un poco más largo (mínimo 5 caracteres) para que sea de utilidad.');
       return;
     }
 
