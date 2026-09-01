@@ -11,7 +11,10 @@ import {
   HelpCircle, 
   Sparkles, 
   BookOpen, 
-  ArrowLeft 
+  ArrowLeft,
+  MousePointerClick,
+  Move,
+  Info
 } from 'lucide-react';
 
 interface ElementData {
@@ -481,7 +484,13 @@ export default function RompecabezasSimbolosPage() {
         
         {/* Navegación y Encabezado integrado al estilo de la app */}
         <div className="mb-6 flex items-center justify-between">
-          
+          <Link 
+            href="/apps" 
+            className="text-accent-gold hover:text-white flex items-center gap-2 text-sm font-medium transition-colors"
+          >
+            <ArrowLeft size={16} /> Volver al Laboratorio
+          </Link>
+
           <div className="flex items-center gap-2">
             <span className="text-xs text-text-muted">Elementos por ronda:</span>
             <select
@@ -506,6 +515,136 @@ export default function RompecabezasSimbolosPage() {
             Ubica los elementos químicos emparejando su símbolo con su nombre oficial y su raíz etimológica en latín.
           </p>
         </header>
+
+        {/* Cuadro de Instrucciones Ultra Claras */}
+        <div className="bg-base-surface border-2 border-accent-gold/40 rounded-sm p-4 md:p-5 mb-6 shadow-lg relative overflow-hidden">
+          <div className="flex items-center gap-2 mb-3">
+            <Info className="text-accent-gold shrink-0" size={22} />
+            <h2 className="text-base md:text-lg font-serif font-black text-accent-gold tracking-wide uppercase">
+              INSTRUCCIONES (Paso a Paso)
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs leading-relaxed">
+            {/* Paso 1 */}
+            <div className="bg-base-dark/80 p-3 rounded-sm border border-base-border flex flex-col justify-between">
+              <div>
+                <span className="font-bold text-accent-gold font-mono text-sm block mb-1">1. Mira la Tabla</span>
+                <p className="text-text-muted">
+                  En la tabla de abajo hay casillas con borde <strong className="text-accent-gold">dorado punteado</strong>.
+                  Si ves un símbolo (ej. <span className="text-accent-gold font-bold">Fe</span>), te pide su nombre (<span className="text-emerald-400 font-bold">Hierro</span>). Si ves un nombre, te pide su símbolo.
+                </p>
+              </div>
+            </div>
+
+            {/* Paso 2 */}
+            <div className="bg-base-dark/80 p-3 rounded-sm border border-base-border flex flex-col justify-between">
+              <div>
+                <span className="font-bold text-accent-gold font-mono text-sm block mb-1">2. Elige tu Método</span>
+                <p className="text-text-muted">
+                  Puedes hacerlo de <strong>DOS FORMAS MUY FÁCILES</strong>:
+                </p>
+                <ul className="mt-1.5 space-y-1 text-[0.72rem] text-text-main">
+                  <li className="flex items-center gap-1.5">
+                    <Move size={13} className="text-accent-gold shrink-0" />
+                    <span><strong>Arrastrar:</strong> Toma la ficha y suéltala sobre su casilla.</span>
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <MousePointerClick size={13} className="text-accent-gold shrink-0" />
+                    <span><strong>O con 2 Clics:</strong> Haz clic a la ficha y luego clic a su casilla.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Paso 3 */}
+            <div className="bg-base-dark/80 p-3 rounded-sm border border-base-border flex flex-col justify-between">
+              <div>
+                <span className="font-bold text-accent-gold font-mono text-sm block mb-1">3. ¡Cuidado con las Trampas!</span>
+                <p className="text-text-muted">
+                  En el banco de fichas hay <strong className="text-red-400">5 fichas trampa</strong> que se parecen mucho pero son incorrectas (ej. confundir <em>Ca</em> con <em>Cd</em> o <em>Co</em>). Si te equivocas, la casilla parpadeará en rojo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Banco de Fichas / Etiquetas (Arriba de la tabla) */}
+        <div className="bg-base-surface border border-base-border rounded-sm p-4 md:p-5 shadow-xl mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
+            <div>
+              <h2 className="font-serif text-accent-gold text-base font-bold flex items-center gap-2">
+                <BookOpen size={18} /> Banco de Fichas Disponibles ({tiles.filter(t => !t.used).length} restantes)
+              </h2>
+              <p className="text-xs text-text-muted">
+                Arrastra una ficha a su casilla en la tabla, o <strong>haz clic en una ficha y después clic en su casilla</strong>.
+              </p>
+            </div>
+
+            {selectedTileId && (
+              <div className="text-xs bg-accent-gold/20 text-accent-gold border border-accent-gold/40 px-3 py-1.5 rounded-sm animate-pulse flex items-center gap-1.5 font-bold">
+                <HelpCircle size={15} /> Ficha seleccionada lista: Ahora haz clic sobre su casilla en la tabla periódica
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-wrap gap-2.5 justify-center min-h-[90px] p-3 bg-base-dark rounded-sm border border-base-border/70">
+            {tiles.map((tile) => {
+              const isSelected = selectedTileId === tile.id;
+              
+              if (tile.used) {
+                return (
+                  <div 
+                    key={tile.id}
+                    className="p-2.5 rounded-sm border border-base-border/30 bg-base-surface/20 opacity-20 min-w-[100px] text-center pointer-events-none"
+                  >
+                    <span className="text-xs font-mono text-text-muted line-through">Colocada ✓</span>
+                  </div>
+                );
+              }
+
+              return (
+                <div
+                  key={tile.id}
+                  draggable={!tile.used}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData('text/plain', tile.id);
+                    setSelectedTileId(tile.id);
+                  }}
+                  onClick={() => {
+                    setSelectedTileId(prev => prev === tile.id ? null : tile.id);
+                  }}
+                  className={`cursor-grab active:cursor-grabbing p-2.5 rounded-sm min-w-[100px] max-w-[140px] flex flex-col items-center justify-center text-center transition-all select-none border
+                    ${isSelected ? 'bg-accent-gold text-base-dark border-accent-gold shadow-lg scale-105 font-bold ring-2 ring-accent-gold/50' :
+                      'bg-base-surface hover:bg-base-surface/80 border-base-border hover:border-accent-gold text-text-main shadow-sm hover:-translate-y-0.5'
+                    }
+                  `}
+                >
+                  {tile.type === 'symbol' ? (
+                    <>
+                      <span className={`text-xl font-black ${isSelected ? 'text-base-dark' : 'text-accent-gold'}`}>
+                        {tile.element.s}
+                      </span>
+                      <span className="text-[0.55rem] uppercase tracking-wider opacity-60 font-mono">Símbolo</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className={`font-bold text-sm ${isSelected ? 'text-base-dark' : 'text-text-main'}`}>
+                        {tile.element.n}
+                      </span>
+                      {tile.element.l && (
+                        <span className={`text-[0.55rem] italic font-serif leading-tight ${isSelected ? 'text-base-dark/80 font-medium' : 'text-accent-gold'}`}>
+                          ({tile.element.l})
+                        </span>
+                      )}
+                      <span className="text-[0.52rem] uppercase tracking-wider opacity-60 font-mono mt-0.5">Nombre</span>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Barra de Controles y Estadísticas */}
         <div className="bg-base-surface border border-base-border rounded-sm p-3 mb-6 flex flex-wrap items-center justify-between gap-4 shadow-md">
@@ -585,83 +724,6 @@ export default function RompecabezasSimbolosPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Banco de Fichas / Etiquetas */}
-        <div className="bg-base-surface border border-base-border rounded-sm p-5 shadow-xl">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-            <div>
-              <h2 className="font-serif text-accent-gold text-base font-bold flex items-center gap-2">
-                <BookOpen size={18} /> Banco de Etiquetas ({tiles.filter(t => !t.used).length} disponibles)
-              </h2>
-              <p className="text-xs text-text-muted">
-                Arrastra la ficha a la casilla correspondiente en la tabla periódica o toca una ficha y luego su casilla.
-              </p>
-            </div>
-
-            {selectedTileId && (
-              <div className="text-xs bg-accent-gold/20 text-accent-gold border border-accent-gold/40 px-3 py-1 rounded-sm animate-pulse flex items-center gap-1.5">
-                <HelpCircle size={14} /> Ficha seleccionada: Toca la casilla destino
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-2.5 justify-center min-h-[100px] p-3 bg-base-dark rounded-sm border border-base-border/70">
-            {tiles.map((tile) => {
-              const isSelected = selectedTileId === tile.id;
-              
-              if (tile.used) {
-                return (
-                  <div 
-                    key={tile.id}
-                    className="p-2.5 rounded-sm border border-base-border/30 bg-base-surface/20 opacity-20 min-w-[100px] text-center pointer-events-none"
-                  >
-                    <span className="text-xs font-mono text-text-muted">Utilizada</span>
-                  </div>
-                );
-              }
-
-              return (
-                <div
-                  key={tile.id}
-                  draggable={!tile.used}
-                  onDragStart={(e) => {
-                    e.dataTransfer.setData('text/plain', tile.id);
-                    setSelectedTileId(tile.id);
-                  }}
-                  onClick={() => {
-                    setSelectedTileId(prev => prev === tile.id ? null : tile.id);
-                  }}
-                  className={`cursor-grab active:cursor-grabbing p-2.5 rounded-sm min-w-[100px] max-w-[140px] flex flex-col items-center justify-center text-center transition-all select-none border
-                    ${isSelected ? 'bg-accent-gold text-base-dark border-accent-gold shadow-lg scale-105 font-bold' :
-                      'bg-base-surface hover:bg-base-surface/80 border-base-border hover:border-accent-gold text-text-main shadow-sm hover:-translate-y-0.5'
-                    }
-                  `}
-                >
-                  {tile.type === 'symbol' ? (
-                    <>
-                      <span className={`text-xl font-black ${isSelected ? 'text-base-dark' : 'text-accent-gold'}`}>
-                        {tile.element.s}
-                      </span>
-                      <span className="text-[0.55rem] uppercase tracking-wider opacity-60 font-mono">Símbolo</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className={`font-bold text-sm ${isSelected ? 'text-base-dark' : 'text-text-main'}`}>
-                        {tile.element.n}
-                      </span>
-                      {tile.element.l && (
-                        <span className={`text-[0.55rem] italic font-serif leading-tight ${isSelected ? 'text-base-dark/80 font-medium' : 'text-accent-gold'}`}>
-                          ({tile.element.l})
-                        </span>
-                      )}
-                      <span className="text-[0.52rem] uppercase tracking-wider opacity-60 font-mono mt-0.5">Nombre</span>
-                    </>
-                  )}
-                </div>
-              );
-            })}
           </div>
         </div>
 
