@@ -94,6 +94,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Química"]
   },
   {
+    id: "memorama-tablas",
+    title: "Memorama de Tablas de Multiplicar",
+    description: "Juego de memoria para emparejar multiplicaciones con sus resultados. Diseñado para reforzar la memorización de las tablas de multiplicar.",
+    category: "educativas",
+    subject: "Matemáticas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/matematicas/memorama-tablas",
+    techStack: ["Next.js", "React", "Matemáticas"]
+  },
+  {
     id: "legendary-tracker",
     title: "Legendary Marvel Log",
     description: "Bitácora de misiones para Marvel Legendary. Registra Masterminds, Schemes, fuerzas enemigas y puntuaciones de los agentes.",
@@ -113,7 +124,18 @@ export const appsData: AppItem[] = [
     status: "En desarrollo", // O "En desarrollo" si prefieres marcarlo así
     isExternal: false,
     url: "/apps/tools/seriestracker",
-    techStack: ["Next.js", "React", "Física", "IndexedDB"]
+    techStack: ["Next.js", "React", "Tool", "IndexedDB"]
+  },
+  {
+    id: "NFLPredictor",
+    title: "NFL Predictor",
+    description: "Herramienta de predicción de resultados de la NFL basada en estadísticas históricas y actuales de los equipos. Permite a los usuarios hacer sus propias predicciones y comparar con las de analistas.",
+    category: "tools",
+    subject: "Análisis Deportivo",
+    status: "Privada", // O "En desarrollo" si prefieres marcarlo así
+    isExternal: false,
+    url: "/apps/tools/nflPredictor",
+    techStack: ["Next.js", "React", "Tool", "IndexedDB"]
   },
   {
     id: "SMD",
