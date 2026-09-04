@@ -1,5 +1,5 @@
 export type AppCategory = 'educativas' | 'tools' | 'juegos';
-export type AppStatus = 'Publicada' | 'Fase 1 (Prueba)' | 'En desarrollo' | 'Concepto';
+export type AppStatus = 'Publicada' | 'Fase 1 (Prueba)' | 'En desarrollo' | 'Concepto' | 'Privada';
 
 export interface AppItem {
   id: string;
