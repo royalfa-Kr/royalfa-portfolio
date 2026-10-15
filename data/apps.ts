@@ -28,6 +28,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Química"]
   },
   {
+    id: "circuitos",
+    title: "Circuitos Eléctricos Ley de Ohm",
+    description: "Herramienta interactiva para practicar la Ley de Ohm y el análisis de circuitos eléctricos. Permite al estudiante calcular voltaje, corriente y resistencia en diferentes configuraciones de circuitos.",
+    category: "educativas",
+    subject: "Física",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/fisica/circuitos",
+    techStack: ["Next.js", "React", "Física"]
+  },
+  {
     id: "venn-diagrams",
     title: "Diagramas de Venn",
     description: "Operaciones con conjuntos expresados en un diagrama de Venn.",
