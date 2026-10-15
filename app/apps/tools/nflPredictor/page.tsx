@@ -287,7 +287,7 @@ export const NFL_TEAM_INJURIES: Record<string, Injury[]> = {
   ],
   NE: [
     { player: "Christian Barmore", pos: "DT", status: "Out", detail: "Tratamiento médico por coágulos sanguíneos; baja confirmada." },
-    { player: "Kendrick Bourne", pos: "PUP", detail: "Rehabilitación de ligamento cruzado anterior." },
+    
     { player: "Sidy Sow", pos: "OG", status: "Out", detail: "Esguince de tobillo sufrido en práctica." },
     { player: "Vederian Lowe", pos: "OT", status: "Questionable", detail: "Sobrecarga en abdomen; práctica condicionada." }
   ],
@@ -308,11 +308,11 @@ export const NFL_TEAM_INJURIES: Record<string, Injury[]> = {
   ],
   KC: [
     { player: "Hollywood Brown", pos: "WR", status: "Out", detail: "Luxación de articulación esternoclavicular." },
-    { player: "Charles Omenihu", pos: "PUP", detail: "Rehabilitación de rodilla." }
+    
   ],
   BAL: [
     { player: "Nate Wiggins", pos: "CB", status: "Questionable", detail: "Impacto en el cuello en entrenamiento." },
-    { player: "Keaton Mitchell", pos: "PUP", detail: "Recuperación de ligamento cruzado." }
+    
   ]
 };
 
