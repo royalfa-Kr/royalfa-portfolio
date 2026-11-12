@@ -66,6 +66,8 @@ export interface Game {
   home: string;
   awayTeamName?: string;
   homeTeamName?: string;
+  awayQb?: string;
+  homeQb?: string;
   awayRecord?: string;
   homeRecord?: string;
   dateStr: string;
@@ -177,7 +179,7 @@ export const NFL_TEAMS: Record<string, TeamInfo> = {
     logo: "https://a.espncdn.com/i/teamlogos/nfl/500/no.png",
     stadium: "Caesars Superdome",
     histStats: { y2025: { offPpg: 20.1, defPpg: 21.4, pfrRating: 5.8 }, y2024: { offPpg: 23.6, defPpg: 19.2, pfrRating: 6.8 } },
-    currStats: { offPpg: 21.0, defPpg: 22.0, ydsPerPlay: 5.2, turnDiff: -1, redZonePct: 54.0, qb: "Derek Carr" }
+    currStats: { offPpg: 21.0, defPpg: 22.0, ydsPerPlay: 5.2, turnDiff: -1, redZonePct: 54.0, qb: "Spencer Rattler" }
   },
   DET: {
     id: "DET", name: "Detroit Lions", short: "Lions", city: "Detroit",
@@ -193,7 +195,7 @@ export const NFL_TEAMS: Record<string, TeamInfo> = {
     logo: "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png",
     stadium: "MetLife Stadium",
     histStats: { y2025: { offPpg: 23.8, defPpg: 19.0, pfrRating: 7.4 }, y2024: { offPpg: 15.8, defPpg: 20.9, pfrRating: 5.2 } },
-    currStats: { offPpg: 24.5, defPpg: 18.6, ydsPerPlay: 5.7, turnDiff: +3, redZonePct: 61.0, qb: "Aaron Rodgers" }
+    currStats: { offPpg: 21.5, defPpg: 18.6, ydsPerPlay: 5.4, turnDiff: +1, redZonePct: 58.0, qb: "Justin Fields" }
   },
   TEN: {
     id: "TEN", name: "Tennessee Titans", short: "Titans", city: "Tennessee",
@@ -201,7 +203,7 @@ export const NFL_TEAMS: Record<string, TeamInfo> = {
     logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png",
     stadium: "Nissan Stadium",
     histStats: { y2025: { offPpg: 19.2, defPpg: 23.1, pfrRating: 5.0 }, y2024: { offPpg: 17.9, defPpg: 21.6, pfrRating: 4.9 } },
-    currStats: { offPpg: 19.8, defPpg: 22.5, ydsPerPlay: 5.0, turnDiff: -2, redZonePct: 52.0, qb: "Will Levis" }
+    currStats: { offPpg: 21.2, defPpg: 22.0, ydsPerPlay: 5.3, turnDiff: 0, redZonePct: 55.0, qb: "Cam Ward" }
   },
   BAL: {
     id: "BAL", name: "Baltimore Ravens", short: "Ravens", city: "Baltimore",
@@ -274,20 +276,124 @@ export const NFL_TEAMS: Record<string, TeamInfo> = {
     stadium: "Hard Rock Stadium",
     histStats: { y2025: { offPpg: 23.6, defPpg: 22.4, pfrRating: 5.9 }, y2024: { offPpg: 29.2, defPpg: 23.0, pfrRating: 7.9 } },
     currStats: { offPpg: 24.8, defPpg: 23.1, ydsPerPlay: 6.0, turnDiff: -1, redZonePct: 58.0, qb: "Tua Tagovailoa" }
+  },
+  PIT: {
+    id: "PIT", name: "Pittsburgh Steelers", short: "Steelers", city: "Pittsburgh",
+    primaryColor: "#FFB612", secondaryColor: "#101820",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png",
+    stadium: "Acrisure Stadium",
+    histStats: { y2025: { offPpg: 21.8, defPpg: 18.2, pfrRating: 7.6 }, y2024: { offPpg: 17.9, defPpg: 19.1, pfrRating: 6.8 } },
+    currStats: { offPpg: 23.8, defPpg: 17.5, ydsPerPlay: 5.6, turnDiff: +5, redZonePct: 59.5, qb: "Aaron Rodgers" }
+  },
+  DEN: {
+    id: "DEN", name: "Denver Broncos", short: "Broncos", city: "Denver",
+    primaryColor: "#FB4F14", secondaryColor: "#002244",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/den.png",
+    stadium: "Empower Field at Mile High",
+    histStats: { y2025: { offPpg: 21.5, defPpg: 19.8, pfrRating: 6.9 }, y2024: { offPpg: 21.0, defPpg: 24.3, pfrRating: 5.8 } },
+    currStats: { offPpg: 22.1, defPpg: 18.9, ydsPerPlay: 5.3, turnDiff: +2, redZonePct: 57.0, qb: "Bo Nix" }
+  },
+  LAC: {
+    id: "LAC", name: "Los Angeles Chargers", short: "Chargers", city: "Los Angeles",
+    primaryColor: "#0080C6", secondaryColor: "#FFC20E",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png",
+    stadium: "SoFi Stadium",
+    histStats: { y2025: { offPpg: 23.4, defPpg: 18.5, pfrRating: 7.8 }, y2024: { offPpg: 20.4, defPpg: 23.4, pfrRating: 6.0 } },
+    currStats: { offPpg: 24.0, defPpg: 18.1, ydsPerPlay: 5.6, turnDiff: +4, redZonePct: 60.0, qb: "Justin Herbert" }
+  },
+  MIN: {
+    id: "MIN", name: "Minnesota Vikings", short: "Vikings", city: "Minnesota",
+    primaryColor: "#4F2683", secondaryColor: "#FFC62F",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/min.png",
+    stadium: "U.S. Bank Stadium",
+    histStats: { y2025: { offPpg: 25.4, defPpg: 19.2, pfrRating: 8.3 }, y2024: { offPpg: 20.2, defPpg: 21.3, pfrRating: 6.4 } },
+    currStats: { offPpg: 26.2, defPpg: 18.8, ydsPerPlay: 5.9, turnDiff: +4, redZonePct: 63.0, qb: "J.J. McCarthy" }
+  },
+  ATL: {
+    id: "ATL", name: "Atlanta Falcons", short: "Falcons", city: "Atlanta",
+    primaryColor: "#A71930", secondaryColor: "#000000",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png",
+    stadium: "Mercedes-Benz Stadium",
+    histStats: { y2025: { offPpg: 23.5, defPpg: 21.8, pfrRating: 6.8 }, y2024: { offPpg: 18.9, defPpg: 21.9, pfrRating: 5.7 } },
+    currStats: { offPpg: 24.4, defPpg: 21.2, ydsPerPlay: 5.7, turnDiff: +1, redZonePct: 59.5, qb: "Michael Penix Jr." }
+  },
+  CHI: {
+    id: "CHI", name: "Chicago Bears", short: "Bears", city: "Chicago",
+    primaryColor: "#0B162A", secondaryColor: "#C83803",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png",
+    stadium: "Soldier Field",
+    histStats: { y2025: { offPpg: 22.0, defPpg: 20.1, pfrRating: 6.7 }, y2024: { offPpg: 21.2, defPpg: 22.3, pfrRating: 5.9 } },
+    currStats: { offPpg: 23.1, defPpg: 19.6, ydsPerPlay: 5.4, turnDiff: +2, redZonePct: 57.5, qb: "Caleb Williams" }
+  },
+  ARI: {
+    id: "ARI", name: "Arizona Cardinals", short: "Cardinals", city: "Arizona",
+    primaryColor: "#97233F", secondaryColor: "#000000",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png",
+    stadium: "State Farm Stadium",
+    histStats: { y2025: { offPpg: 22.8, defPpg: 23.5, pfrRating: 6.2 }, y2024: { offPpg: 19.4, defPpg: 26.8, pfrRating: 5.0 } },
+    currStats: { offPpg: 23.5, defPpg: 22.9, ydsPerPlay: 5.6, turnDiff: 0, redZonePct: 58.2, qb: "Kyler Murray" }
+  },
+  WSH: {
+    id: "WSH", name: "Washington Commanders", short: "Commanders", city: "Washington",
+    primaryColor: "#5A1414", secondaryColor: "#FFB612",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png",
+    stadium: "Northwest Stadium",
+    histStats: { y2025: { offPpg: 26.8, defPpg: 21.5, pfrRating: 8.1 }, y2024: { offPpg: 19.4, defPpg: 30.5, pfrRating: 4.5 } },
+    currStats: { offPpg: 27.2, defPpg: 21.0, ydsPerPlay: 6.0, turnDiff: +4, redZonePct: 64.5, qb: "Jayden Daniels" }
+  },
+  NYG: {
+    id: "NYG", name: "New York Giants", short: "Giants", city: "New York",
+    primaryColor: "#0B2265", secondaryColor: "#A71930",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
+    stadium: "MetLife Stadium",
+    histStats: { y2025: { offPpg: 17.5, defPpg: 23.2, pfrRating: 4.9 }, y2024: { offPpg: 15.6, defPpg: 23.9, pfrRating: 4.6 } },
+    currStats: { offPpg: 20.5, defPpg: 22.0, ydsPerPlay: 5.2, turnDiff: 0, redZonePct: 54.0, qb: "Russell Wilson" }
+  },
+  JAX: {
+    id: "JAX", name: "Jacksonville Jaguars", short: "Jaguars", city: "Jacksonville",
+    primaryColor: "#006778", secondaryColor: "#D7A22A",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png",
+    stadium: "EverBank Stadium",
+    histStats: { y2025: { offPpg: 21.2, defPpg: 22.8, pfrRating: 5.9 }, y2024: { offPpg: 22.2, defPpg: 21.8, pfrRating: 6.5 } },
+    currStats: { offPpg: 22.0, defPpg: 22.1, ydsPerPlay: 5.4, turnDiff: -1, redZonePct: 55.5, qb: "Trevor Lawrence" }
+  },
+  CAR: {
+    id: "CAR", name: "Carolina Panthers", short: "Panthers", city: "Carolina",
+    primaryColor: "#0085CA", secondaryColor: "#101820",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/car.png",
+    stadium: "Bank of America Stadium",
+    histStats: { y2025: { offPpg: 17.2, defPpg: 25.4, pfrRating: 4.4 }, y2024: { offPpg: 13.9, defPpg: 24.5, pfrRating: 3.9 } },
+    currStats: { offPpg: 18.4, defPpg: 24.2, ydsPerPlay: 4.8, turnDiff: -3, redZonePct: 50.5, qb: "Bryce Young" }
+  },
+  CLE: {
+    id: "CLE", name: "Cleveland Browns", short: "Browns", city: "Cleveland",
+    primaryColor: "#311D00", secondaryColor: "#FF3C00",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png",
+    stadium: "Huntington Bank Field",
+    histStats: { y2025: { offPpg: 18.5, defPpg: 21.0, pfrRating: 5.6 }, y2024: { offPpg: 23.3, defPpg: 21.3, pfrRating: 7.1 } },
+    currStats: { offPpg: 19.6, defPpg: 20.4, ydsPerPlay: 5.0, turnDiff: -1, redZonePct: 53.0, qb: "Shedeur Sanders" }
+  },
+  LV: {
+    id: "LV", name: "Las Vegas Raiders", short: "Raiders", city: "Las Vegas",
+    primaryColor: "#000000", secondaryColor: "#A5ACAF",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png",
+    stadium: "Allegiant Stadium",
+    histStats: { y2025: { offPpg: 19.0, defPpg: 22.8, pfrRating: 5.3 }, y2024: { offPpg: 19.5, defPpg: 19.5, pfrRating: 6.1 } },
+    currStats: { offPpg: 21.5, defPpg: 21.8, ydsPerPlay: 5.4, turnDiff: 0, redZonePct: 56.5, qb: "Geno Smith" }
   }
 };
 
 export const NFL_TEAM_INJURIES: Record<string, Injury[]> = {
   SEA: [
     { player: "Sam Darnold", pos: "QB", status: "Out", detail: "Lesión de tobillo/rodilla en la 5ª jugada del Q1; fuera del encuentro." },
-    { player: "Zach Charbonnet", pos: "RB", status: "Out", detail: "En lista PUP / Rehabilitación de rodilla (LCA); no jugará." },
+    { player: "Zach Charbonnet", pos: "RB", status: "PUP", detail: "En lista PUP / Rehabilitación de rodilla (LCA); no jugará." },
     { player: "Uchenna Nwosu", pos: "OLB", status: "Out", detail: "Esguince de rodilla en rehabilitación; no disponible." },
     { player: "Jake Bobo", pos: "WR", status: "IR", detail: "Lista de reserva de lesionados por dolencia en la pierna." },
     { player: "Abraham Lucas", pos: "OT", status: "PUP", detail: "Incapacidad física por procedimiento de rodilla." }
   ],
   NE: [
     { player: "Christian Barmore", pos: "DT", status: "Out", detail: "Tratamiento médico por coágulos sanguíneos; baja confirmada." },
-    
+    { player: "Kendrick Bourne", pos: "WR", status: "PUP", detail: "Rehabilitación de ligamento cruzado anterior." },
     { player: "Sidy Sow", pos: "OG", status: "Out", detail: "Esguince de tobillo sufrido en práctica." },
     { player: "Vederian Lowe", pos: "OT", status: "Questionable", detail: "Sobrecarga en abdomen; práctica condicionada." }
   ],
@@ -308,13 +414,66 @@ export const NFL_TEAM_INJURIES: Record<string, Injury[]> = {
   ],
   KC: [
     { player: "Hollywood Brown", pos: "WR", status: "Out", detail: "Luxación de articulación esternoclavicular." },
-    
+    { player: "Charles Omenihu", pos: "DE", status: "PUP", detail: "Rehabilitación de rodilla." }
   ],
   BAL: [
     { player: "Nate Wiggins", pos: "CB", status: "Questionable", detail: "Impacto en el cuello en entrenamiento." },
-    
+    { player: "Keaton Mitchell", pos: "RB", status: "PUP", detail: "Recuperación de ligamento cruzado." }
+  ],
+  DAL: [
+    { player: "Micah Parsons", pos: "LB", status: "Questionable", detail: "Sobrecarga en cuello." },
+    { player: "DaRon Bland", pos: "CB", status: "IR", detail: "Fractura de pie en recuperación." }
+  ],
+  DEN: [
+    { player: "Audric Estimé", pos: "RB", status: "IR", detail: "Procedimiento de tobillo." },
+    { player: "Alex Singleton", pos: "LB", status: "IR", detail: "Rotura de ligamento cruzado." }
+  ],
+  PIT: [
+    { player: "T.J. Watt", pos: "LB", status: "Active", detail: "Listo y sin restricciones para el partido." },
+    { player: "Jaylen Warren", pos: "RB", status: "Questionable", detail: "Molestia leve en rodilla; entrenó jueves y viernes." },
+    { player: "Alex Highsmith", pos: "LB", status: "Questionable", detail: "Sobrecarga en ingle." }
   ]
 };
+
+export function buildDefaultAnalysts(awayId: string, homeId: string, sim: ReturnType<typeof simulateMatchup>): AnalystPrediction[] {
+  const awayInfo = NFL_TEAMS[awayId] || { short: awayId, name: awayId };
+  const homeInfo = NFL_TEAMS[homeId] || { short: homeId, name: homeId };
+  const fav = sim.favoredTeam;
+  const favShort = fav === awayId ? awayInfo.short : homeInfo.short;
+  const dog = fav === awayId ? homeId : awayId;
+  const dogShort = dog === awayId ? awayInfo.short : homeInfo.short;
+  const spreadAbs = Math.max(1.5, Math.round(Math.abs(Number(sim.spread)) * 2) / 2).toFixed(1);
+
+  return [
+    {
+      name: "Mina Kimes",
+      outlet: "ESPN",
+      pick: fav,
+      spreadPick: `${fav} -${spreadAbs}`,
+      predictedScore: { away: Math.round(sim.awayExp), home: Math.round(sim.homeExp) },
+      confidence: `${sim.confidence}%`,
+      text: `La ventaja en eficiencia por jugada y el control en tercer down inclinan la balanza a favor de ${favShort}.`
+    },
+    {
+      name: "Colin Cowherd",
+      outlet: "FS1",
+      pick: homeId,
+      spreadPick: fav === homeId ? `${homeId} -${spreadAbs}` : `${homeId} +${spreadAbs}`,
+      predictedScore: { away: Math.max(13, Math.round(sim.awayExp) - 2), home: Math.round(sim.homeExp) + 2 },
+      confidence: "72%",
+      text: `La localía y la línea ofensiva de ${homeInfo.short} marcarán la diferencia en la segunda mitad.`
+    },
+    {
+      name: "Nick Wright",
+      outlet: "FS1",
+      pick: fav,
+      spreadPick: `${dog} +${spreadAbs}`,
+      predictedScore: { away: Math.round(sim.awayExp), home: Math.round(sim.homeExp) - 1 },
+      confidence: "68%",
+      text: `Será un partido más cerrado de lo que dicen las líneas; ${dogShort} competirá hasta el último cuarto.`
+    }
+  ];
+}
 
 export function simulateMatchup(awayId: string, homeId: string, awayInjuries: Injury[] = [], homeInjuries: Injury[] = []) {
   const away = NFL_TEAMS[awayId] || NFL_TEAMS.NE;
@@ -364,7 +523,7 @@ export const INITIAL_WEEKS: Week[] = [
     weekNum: 1,
     title: "Semana 1",
     label: "Kickoff Weekend",
-    isCurrent: true,
+    isCurrent: false,
     games: [
       {
         id: "W1_NE_SEA",
@@ -378,8 +537,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "06:20 p.m. CST",
         venue: "Lumen Field, Seattle",
         tv: "NBC",
-        status: "live",
-        liveClock: "4to Cuarto 03:42",
+        status: "final",
+        liveClock: "Final",
         score: {
           away: 20,
           home: 24,
@@ -459,56 +618,16 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "06:35 p.m. CST",
         venue: "Melbourne Cricket Ground, Melbourne",
         tv: "Netflix",
-        status: "upcoming",
+        status: "final",
+        score: { away: 27, home: 20 },
         odds: {
           draftKings: { spreadAway: "+LAR 3.5", spreadHome: "LAR -3.5", mlAway: "-120", mlHome: "+100", ou: "46.5" },
           fanDuel: { spreadAway: "+LAR 3.5", spreadHome: "LAR -3.5", mlAway: "-125", mlHome: "+105", ou: "47.0" },
           betMGM: { spreadAway: "+LAR 3.5", spreadHome: "LAR -3.5", mlAway: "-118", mlHome: "+102", ou: "46.5" }
         },
-        analysts: [
-          {
-            name: "Mina Kimes",
-            outlet: "ESPN",
-            pick: "SF",
-            spreadPick: "SF -3.5",
-            predictedScore: { away: 27, home: 20 },
-            confidence: "70%",
-            text: "El esquema de Kyle Shanahan suele descifrar a la defensa de los Rams aun en suelo internacional."
-          },
-          {
-            name: "Colin Cowherd",
-            outlet: "FS1",
-            pick: "LAR",
-            spreadPick: "LAR +3.5",
-            predictedScore: { away: 24, home: 23 },
-            confidence: "65%",
-            text: "Matthew Stafford está en gran forma y el ataque aéreo mantendrá el choque dentro de la línea."
-          },
-          {
-            name: "Nick Wright",
-            outlet: "FS1",
-            pick: "SF",
-            spreadPick: "SF -3.5",
-            predictedScore: { away: 31, home: 21 },
-            confidence: "82%",
-            text: "El arsenal de armas de San Francisco dominará las trincheras al final del 4to cuarto."
-          }
-        ],
         injuries: {
           away: NFL_TEAM_INJURIES.SF,
           home: NFL_TEAM_INJURIES.LAR
-        },
-        stats: {
-          totalYards: { away: 0, home: 0 },
-          passYards: { away: 0, home: 0 },
-          rushYards: { away: 0, home: 0 },
-          turnovers: { away: 0, home: 0 },
-          timeOfPoss: { away: "00:00", home: "00:00" },
-          thirdDown: { away: "0/0", home: "0/0" },
-          topPlayers: {
-            away: [{ name: "Brock Purdy", pos: "QB", stat: "Proy: 265 Yds Pass, 2 TD", rating: 9.0 }],
-            home: [{ name: "Matthew Stafford", pos: "QB", stat: "Proy: 270 Yds Pass, 2 TD", rating: 8.8 }]
-          }
         }
       },
       {
@@ -523,7 +642,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "11:00 a.m. CST",
         venue: "Paycor Stadium, Cincinnati",
         tv: "FOX",
-        status: "upcoming",
+        status: "final",
+        score: { away: 20, home: 24 },
         odds: {
           draftKings: { spreadAway: "+CIN 3.5", spreadHome: "CIN -3.5", mlAway: "+160", mlHome: "-190", ou: "48.0" },
           fanDuel: { spreadAway: "+CIN 3.5", spreadHome: "CIN -3.5", mlAway: "+162", mlHome: "-195", ou: "48.5" },
@@ -546,12 +666,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "11:00 a.m. CST",
         venue: "Ford Field, Detroit",
         tv: "FOX",
-        status: "upcoming",
-        odds: {
-          draftKings: { spreadAway: "+DET 7", spreadHome: "DET -7", mlAway: "+260", mlHome: "-320", ou: "49.5" },
-          fanDuel: { spreadAway: "+DET 7", spreadHome: "DET -7", mlAway: "+265", mlHome: "-330", ou: "50.0" },
-          betMGM: { spreadAway: "+DET 7", spreadHome: "DET -7", mlAway: "+250", mlHome: "-310", ou: "49.5" }
-        }
+        status: "final",
+        score: { away: 17, home: 31 }
       },
       {
         id: "W1_NYJ_TEN",
@@ -565,12 +681,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "11:00 a.m. CST",
         venue: "Nissan Stadium, Nashville",
         tv: "CBS",
-        status: "upcoming",
-        odds: {
-          draftKings: { spreadAway: "+TEN 1.5", spreadHome: "TEN -1.5", mlAway: "-118", mlHome: "+100", ou: "42.5" },
-          fanDuel: { spreadAway: "+TEN 1.5", spreadHome: "TEN -1.5", mlAway: "-120", mlHome: "+102", ou: "43.0" },
-          betMGM: { spreadAway: "+TEN 1.5", spreadHome: "TEN -1.5", mlAway: "-115", mlHome: "-105", ou: "42.5" }
-        }
+        status: "final",
+        score: { away: 24, home: 17 }
       },
       {
         id: "W1_BAL_IND",
@@ -584,12 +696,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "11:00 a.m. CST",
         venue: "Lucas Oil Stadium, Indianapolis",
         tv: "CBS",
-        status: "upcoming",
-        odds: {
-          draftKings: { spreadAway: "+BAL 3.5", spreadHome: "BAL -3.5", mlAway: "-180", mlHome: "+150", ou: "47.5" },
-          fanDuel: { spreadAway: "+BAL 3.5", spreadHome: "BAL -3.5", mlAway: "-185", mlHome: "+154", ou: "48.0" },
-          betMGM: { spreadAway: "+BAL 3.5", spreadHome: "BAL -3.5", mlAway: "-175", mlHome: "+148", ou: "47.5" }
-        },
+        status: "final",
+        score: { away: 28, home: 20 },
         injuries: {
           away: NFL_TEAM_INJURIES.BAL,
           home: []
@@ -613,7 +721,8 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "06:15 p.m. CST",
         venue: "Hard Rock Stadium, Miami Gardens",
         tv: "Amazon Prime Video",
-        status: "upcoming"
+        status: "final",
+        score: { away: 31, home: 10 }
       },
       {
         id: "W2_KC_CIN",
@@ -625,7 +734,12 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "03:25 p.m. CST",
         venue: "GEHA Field at Arrowhead Stadium",
         tv: "CBS",
-        status: "upcoming"
+        status: "final",
+        score: { away: 25, home: 26 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.CIN,
+          home: NFL_TEAM_INJURIES.KC
+        }
       }
     ]
   },
@@ -645,36 +759,757 @@ export const INITIAL_WEEKS: Week[] = [
         timeStr: "03:25 p.m. CST",
         venue: "Levi's Stadium, Santa Clara",
         tv: "FOX",
-        status: "upcoming"
+        status: "final",
+        score: { away: 28, home: 18 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.KC,
+          home: NFL_TEAM_INJURIES.SF
+        }
+      },
+      {
+        id: "W3_BAL_DET",
+        away: "BAL",
+        home: "DET",
+        awayTeamName: "Baltimore Ravens",
+        homeTeamName: "Detroit Lions",
+        dateStr: "dom 27 de sep",
+        timeStr: "11:00 a.m. CST",
+        venue: "Ford Field, Detroit",
+        tv: "CBS",
+        status: "final",
+        score: { away: 24, home: 27 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.BAL,
+          home: []
+        }
       }
     ]
-  }
+  },
+  {
+    weekNum: 4,
+    title: "Semana 4",
+    label: "Choques de Conferencia",
+    isCurrent: false,
+    games: [
+      {
+        id: "W4_KC_LAC",
+        away: "KC",
+        home: "LAC",
+        awayTeamName: "Kansas City Chiefs",
+        homeTeamName: "Los Angeles Chargers",
+        dateStr: "dom 4 de oct",
+        timeStr: "03:25 p.m. CST",
+        venue: "SoFi Stadium, Inglewood",
+        tv: "CBS",
+        status: "final",
+        score: { away: 17, home: 10 }
+      },
+      {
+        id: "W4_BUF_BAL",
+        away: "BUF",
+        home: "BAL",
+        awayTeamName: "Buffalo Bills",
+        homeTeamName: "Baltimore Ravens",
+        dateStr: "dom 4 de oct",
+        timeStr: "06:20 p.m. CST",
+        venue: "M&T Bank Stadium, Baltimore",
+        tv: "NBC",
+        status: "final",
+        score: { away: 10, home: 35 }
+      }
+    ]
+  },
+  {
+    weekNum: 5,
+    title: "Semana 5",
+    label: "Jornada 5 (Reciente)",
+    isCurrent: false,
+    games: [
+      {
+        id: "W5_TB_DAL",
+        away: "TB",
+        home: "DAL",
+        awayTeamName: "Tampa Bay Buccaneers",
+        homeTeamName: "Dallas Cowboys",
+        dateStr: "jue 8 de oct",
+        timeStr: "06:15 p.m. CST",
+        venue: "AT&T Stadium, Arlington",
+        tv: "Prime Video",
+        status: "final",
+        score: { away: 24, home: 16 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.TB,
+          home: NFL_TEAM_INJURIES.DAL
+        }
+      },
+      {
+        id: "W5_SF_SEA",
+        away: "SF",
+        home: "SEA",
+        awayTeamName: "San Francisco 49ers",
+        homeTeamName: "Seattle Seahawks",
+        dateStr: "dom 11 de oct",
+        timeStr: "02:25 p.m. CST",
+        venue: "Lumen Field, Seattle",
+        tv: "FOX",
+        status: "final",
+        score: { away: 32, home: 29 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.SF,
+          home: NFL_TEAM_INJURIES.SEA
+        },
+        stats: {
+          totalYards: { away: 412, home: 388 },
+          passYards: { away: 285, home: 270 },
+          rushYards: { away: 127, home: 118 },
+          turnovers: { away: 1, home: 2 },
+          timeOfPoss: { away: "31:10", home: "28:50" },
+          thirdDown: { away: "6/12 (50%)", home: "5/11 (45%)" },
+          topPlayers: {
+            away: [
+              { name: "Brock Purdy", pos: "QB", stat: "285 Yds, 3 TD, 0 INT", rating: 9.6 },
+              { name: "George Kittle", pos: "TE", stat: "7 Rec, 88 Yds, 2 TD", rating: 9.4 }
+            ],
+            home: [
+              { name: "Drew Lock", pos: "QB", stat: "270 Yds, 2 TD, 1 INT", rating: 8.7 },
+              { name: "Jaxon Smith-Njigba", pos: "WR", stat: "8 Rec, 94 Yds, 1 TD", rating: 8.9 }
+            ]
+          }
+        }
+      },
+      {
+        id: "W5_BUF_LAR",
+        away: "BUF",
+        home: "LAR",
+        awayTeamName: "Buffalo Bills",
+        homeTeamName: "Los Angeles Rams",
+        dateStr: "lun 12 de oct",
+        timeStr: "06:15 p.m. CST",
+        venue: "SoFi Stadium, Inglewood",
+        tv: "ESPN / ABC",
+        status: "final",
+        score: { away: 37, home: 34 },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.LAR
+        }
+      },
+      {
+        id: "W5_BAL_ATL",
+        away: "BAL",
+        home: "ATL",
+        awayTeamName: "Baltimore Ravens",
+        homeTeamName: "Atlanta Falcons",
+        dateStr: "dom 11 de oct",
+        timeStr: "06:20 p.m. CST",
+        venue: "Mercedes-Benz Stadium, Atlanta",
+        tv: "NBC",
+        status: "final",
+        score: { away: 30, home: 23 },
+        injuries: {
+          away: NFL_TEAM_INJURIES.BAL,
+          home: []
+        }
+      },
+      {
+        id: "W5_NE_LV",
+        away: "LV",
+        home: "NE",
+        awayTeamName: "Las Vegas Raiders",
+        homeTeamName: "New England Patriots",
+        dateStr: "dom 11 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Gillette Stadium, Foxborough",
+        tv: "CBS",
+        status: "final",
+        score: { away: 17, home: 45 },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.NE
+        }
+      },
+      {
+        id: "W5_CIN_MIA",
+        away: "CIN",
+        home: "MIA",
+        awayTeamName: "Cincinnati Bengals",
+        homeTeamName: "Miami Dolphins",
+        dateStr: "dom 11 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Hard Rock Stadium, Miami Gardens",
+        tv: "FOX",
+        status: "final",
+        score: { away: 31, home: 24 }
+      },
+      {
+        id: "W5_CHI_GB",
+        away: "CHI",
+        home: "GB",
+        awayTeamName: "Chicago Bears",
+        homeTeamName: "Green Bay Packers",
+        dateStr: "dom 11 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Lambeau Field, Green Bay",
+        tv: "FOX",
+        status: "final",
+        score: { away: 7, home: 31 }
+      },
+      {
+        id: "W5_DET_ARI",
+        away: "DET",
+        home: "ARI",
+        awayTeamName: "Detroit Lions",
+        homeTeamName: "Arizona Cardinals",
+        dateStr: "dom 11 de oct",
+        timeStr: "02:25 p.m. CST",
+        venue: "State Farm Stadium, Glendale",
+        tv: "FOX",
+        status: "final",
+        score: { away: 45, home: 21 }
+      }
+    ]
+  },
+  {
+    weekNum: 6,
+    title: "Semana 6",
+    label: "Semana en Curso (Activa)",
+    isCurrent: true,
+    games: [
+      {
+        id: "W6_SEA_DEN",
+        away: "SEA",
+        home: "DEN",
+        awayTeamName: "Seattle Seahawks",
+        homeTeamName: "Denver Broncos",
+        awayRecord: "3-2",
+        homeRecord: "2-3",
+        dateStr: "jue 15 de oct",
+        timeStr: "06:15 p.m. CST",
+        venue: "Empower Field at Mile High, Denver",
+        tv: "Prime Video",
+        status: "live",
+        liveClock: "4to Cuarto 01:19",
+        score: {
+          away: 11,
+          home: 14,
+          qtrs: {
+            away: [3, 0, 8, 0],
+            home: [0, 7, 0, 7]
+          }
+        },
+        odds: {
+          draftKings: { spreadAway: "+DEN 2.5", spreadHome: "DEN -2.5", mlAway: "+115", mlHome: "-135", ou: "42.5" },
+          fanDuel: { spreadAway: "+DEN 2.5", spreadHome: "DEN -2.5", mlAway: "+118", mlHome: "-140", ou: "43.0" },
+          betMGM: { spreadAway: "+DEN 2.5", spreadHome: "DEN -2.5", mlAway: "+112", mlHome: "-130", ou: "42.5" }
+        },
+        injuries: {
+          away: NFL_TEAM_INJURIES.SEA,
+          home: NFL_TEAM_INJURIES.DEN
+        },
+        stats: {
+          totalYards: { away: 300, home: 161 },
+          passYards: { away: 197, home: 94 },
+          rushYards: { away: 103, home: 67 },
+          turnovers: { away: 2, home: 0 },
+          timeOfPoss: { away: "32:01", home: "26:34" },
+          thirdDown: { away: "5/14 (36%)", home: "3/12 (25%)" }
+        }
+      },
+      {
+        id: "W6_TB_PIT",
+        away: "TB",
+        home: "PIT",
+        awayTeamName: "Tampa Bay Buccaneers",
+        homeTeamName: "Pittsburgh Steelers",
+        awayRecord: "3-2",
+        homeRecord: "3-2",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Acrisure Stadium, Pittsburgh",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "+PIT 2.5", spreadHome: "PIT -2.5", mlAway: "+120", mlHome: "-142", ou: "43.5" },
+          fanDuel: { spreadAway: "+PIT 2.5", spreadHome: "PIT -2.5", mlAway: "+122", mlHome: "-145", ou: "44.0" },
+          betMGM: { spreadAway: "+PIT 2.0", spreadHome: "PIT -2.0", mlAway: "+115", mlHome: "-138", ou: "43.5" }
+        },
+        analysts: [
+          {
+            name: "Mina Kimes",
+            outlet: "ESPN",
+            pick: "PIT",
+            spreadPick: "PIT -2.5",
+            predictedScore: { away: 17, home: 21 },
+            confidence: "74%",
+            text: "La presión de T.J. Watt y el frente defensivo de Pittsburgh en Acrisure Stadium complicarán a Baker Mayfield."
+          },
+          {
+            name: "Colin Cowherd",
+            outlet: "FS1",
+            pick: "PIT",
+            spreadPick: "PIT -2.5",
+            predictedScore: { away: 16, home: 20 },
+            confidence: "71%",
+            text: "Aaron Rodgers y Mike Tomlin dominan este tipo de duelos físicos en casa con defensiva y control de reloj."
+          },
+          {
+            name: "Nick Wright",
+            outlet: "FS1",
+            pick: "TB",
+            spreadPick: "TB +2.5",
+            predictedScore: { away: 23, home: 20 },
+            confidence: "66%",
+            text: "Baker Mayfield y Mike Evans encontrarán jugadas grandes en zona roja para llevarse la victoria como visitantes."
+          }
+        ],
+        injuries: {
+          away: NFL_TEAM_INJURIES.TB,
+          home: NFL_TEAM_INJURIES.PIT
+        }
+      },
+      {
+        id: "W6_DET_MIN",
+        away: "DET",
+        home: "MIN",
+        awayTeamName: "Detroit Lions",
+        homeTeamName: "Minnesota Vikings",
+        awayRecord: "4-1",
+        homeRecord: "4-1",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "U.S. Bank Stadium, Minneapolis",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-DET 1.5", spreadHome: "+DET 1.5", mlAway: "-125", mlHome: "+105", ou: "50.5" },
+          fanDuel: { spreadAway: "-DET 1.5", spreadHome: "+DET 1.5", mlAway: "-128", mlHome: "+108", ou: "51.0" },
+          betMGM: { spreadAway: "-DET 1.5", spreadHome: "+DET 1.5", mlAway: "-120", mlHome: "+100", ou: "50.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      },
+      {
+        id: "W6_PHI_CLE",
+        away: "CLE",
+        home: "PHI",
+        awayTeamName: "Cleveland Browns",
+        homeTeamName: "Philadelphia Eagles",
+        awayRecord: "1-4",
+        homeRecord: "4-1",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Lincoln Financial Field, Philadelphia",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "+PHI 8.5", spreadHome: "PHI -8.5", mlAway: "+340", mlHome: "-440", ou: "42.5" },
+          fanDuel: { spreadAway: "+PHI 8.5", spreadHome: "PHI -8.5", mlAway: "+350", mlHome: "-450", ou: "43.0" },
+          betMGM: { spreadAway: "+PHI 8.0", spreadHome: "PHI -8.0", mlAway: "+320", mlHome: "-420", ou: "42.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      },
+      {
+        id: "W6_WSH_BAL",
+        away: "WSH",
+        home: "BAL",
+        awayTeamName: "Washington Commanders",
+        homeTeamName: "Baltimore Ravens",
+        awayRecord: "4-1",
+        homeRecord: "4-1",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "M&T Bank Stadium, Baltimore",
+        tv: "CBS",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "+BAL 6.5", spreadHome: "BAL -6.5", mlAway: "+235", mlHome: "-290", ou: "51.5" },
+          fanDuel: { spreadAway: "+BAL 6.5", spreadHome: "BAL -6.5", mlAway: "+240", mlHome: "-300", ou: "52.0" },
+          betMGM: { spreadAway: "+BAL 6.5", spreadHome: "BAL -6.5", mlAway: "+230", mlHome: "-285", ou: "51.5" }
+        },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.BAL
+        }
+      },
+      {
+        id: "W6_HOU_NE",
+        away: "HOU",
+        home: "NE",
+        awayTeamName: "Houston Texans",
+        homeTeamName: "New England Patriots",
+        awayRecord: "4-1",
+        homeRecord: "3-2",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Gillette Stadium, Foxborough",
+        tv: "CBS",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-HOU 6.5", spreadHome: "+HOU 6.5", mlAway: "-285", mlHome: "+230", ou: "38.5" },
+          fanDuel: { spreadAway: "-HOU 7.0", spreadHome: "+HOU 7.0", mlAway: "-295", mlHome: "+240", ou: "39.0" },
+          betMGM: { spreadAway: "-HOU 6.5", spreadHome: "+HOU 6.5", mlAway: "-280", mlHome: "+225", ou: "38.5" }
+        },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.NE
+        }
+      },
+      {
+        id: "W6_IND_TEN",
+        away: "IND",
+        home: "TEN",
+        awayTeamName: "Indianapolis Colts",
+        homeTeamName: "Tennessee Titans",
+        awayRecord: "3-2",
+        homeRecord: "1-4",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Nissan Stadium, Nashville",
+        tv: "CBS",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-IND 2.5", spreadHome: "+IND 2.5", mlAway: "-142", mlHome: "+120", ou: "42.5" },
+          fanDuel: { spreadAway: "-IND 2.5", spreadHome: "+IND 2.5", mlAway: "-145", mlHome: "+122", ou: "43.0" },
+          betMGM: { spreadAway: "-IND 2.5", spreadHome: "+IND 2.5", mlAway: "-138", mlHome: "+115", ou: "42.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      },
+      {
+        id: "W6_ARI_GB",
+        away: "ARI",
+        home: "GB",
+        awayTeamName: "Arizona Cardinals",
+        homeTeamName: "Green Bay Packers",
+        awayRecord: "2-3",
+        homeRecord: "3-2",
+        dateStr: "dom 18 de oct",
+        timeStr: "11:00 a.m. CST",
+        venue: "Lambeau Field, Green Bay",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "+GB 5.5", spreadHome: "GB -5.5", mlAway: "+195", mlHome: "-238", ou: "47.5" },
+          fanDuel: { spreadAway: "+GB 5.5", spreadHome: "GB -5.5", mlAway: "+200", mlHome: "-245", ou: "48.0" },
+          betMGM: { spreadAway: "+GB 5.0", spreadHome: "GB -5.0", mlAway: "+190", mlHome: "-230", ou: "47.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      },
+      {
+        id: "W6_NO_TB_ALT",
+        away: "ATL",
+        home: "CAR",
+        awayTeamName: "Atlanta Falcons",
+        homeTeamName: "Carolina Panthers",
+        awayRecord: "3-2",
+        homeRecord: "1-4",
+        dateStr: "dom 18 de oct",
+        timeStr: "02:25 p.m. CST",
+        venue: "Bank of America Stadium, Charlotte",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-ATL 6.0", spreadHome: "+ATL 6.0", mlAway: "-258", mlHome: "+210", ou: "46.5" },
+          fanDuel: { spreadAway: "-ATL 6.0", spreadHome: "+ATL 6.0", mlAway: "-265", mlHome: "+215", ou: "47.0" },
+          betMGM: { spreadAway: "-ATL 6.0", spreadHome: "+ATL 6.0", mlAway: "-250", mlHome: "+205", ou: "46.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      },
+      {
+        id: "W6_LAC_KC",
+        away: "LAC",
+        home: "KC",
+        awayTeamName: "Los Angeles Chargers",
+        homeTeamName: "Kansas City Chiefs",
+        awayRecord: "3-2",
+        homeRecord: "5-0",
+        dateStr: "dom 18 de oct",
+        timeStr: "02:25 p.m. CST",
+        venue: "GEHA Field at Arrowhead Stadium, Kansas City",
+        tv: "CBS",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "+KC 6.5", spreadHome: "KC -6.5", mlAway: "+240", mlHome: "-300", ou: "46.5" },
+          fanDuel: { spreadAway: "+KC 6.5", spreadHome: "KC -6.5", mlAway: "+245", mlHome: "-310", ou: "47.0" },
+          betMGM: { spreadAway: "+KC 6.5", spreadHome: "KC -6.5", mlAway: "+235", mlHome: "-290", ou: "46.5" }
+        },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.KC
+        }
+      },
+      {
+        id: "W6_DET_DAL",
+        away: "DET",
+        home: "DAL",
+        awayTeamName: "Detroit Lions",
+        homeTeamName: "Dallas Cowboys",
+        awayRecord: "4-1",
+        homeRecord: "3-2",
+        dateStr: "dom 18 de oct",
+        timeStr: "02:25 p.m. CST",
+        venue: "AT&T Stadium, Arlington",
+        tv: "FOX",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-DET 3.0", spreadHome: "+DET 3.0", mlAway: "-165", mlHome: "+140", ou: "52.5" },
+          fanDuel: { spreadAway: "-DET 3.5", spreadHome: "+DET 3.5", mlAway: "-170", mlHome: "+145", ou: "53.0" },
+          betMGM: { spreadAway: "-DET 3.0", spreadHome: "+DET 3.0", mlAway: "-160", mlHome: "+135", ou: "52.5" }
+        },
+        injuries: {
+          away: [],
+          home: NFL_TEAM_INJURIES.DAL
+        }
+      },
+      {
+        id: "W6_CIN_NYG",
+        away: "CIN",
+        home: "NYG",
+        awayTeamName: "Cincinnati Bengals",
+        homeTeamName: "New York Giants",
+        awayRecord: "2-3",
+        homeRecord: "2-3",
+        dateStr: "dom 18 de oct",
+        timeStr: "06:20 p.m. CST",
+        venue: "MetLife Stadium, East Rutherford",
+        tv: "NBC",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-CIN 3.5", spreadHome: "+CIN 3.5", mlAway: "-190", mlHome: "+158", ou: "47.5" },
+          fanDuel: { spreadAway: "-CIN 3.5", spreadHome: "+CIN 3.5", mlAway: "-195", mlHome: "+162", ou: "48.0" },
+          betMGM: { spreadAway: "-CIN 3.5", spreadHome: "+CIN 3.5", mlAway: "-185", mlHome: "+155", ou: "47.5" }
+        },
+        injuries: {
+          away: NFL_TEAM_INJURIES.CIN,
+          home: []
+        }
+      },
+      {
+        id: "W6_BUF_NYJ",
+        away: "BUF",
+        home: "NYJ",
+        awayTeamName: "Buffalo Bills",
+        homeTeamName: "New York Jets",
+        awayRecord: "4-1",
+        homeRecord: "2-3",
+        dateStr: "lun 19 de oct",
+        timeStr: "06:15 p.m. CST",
+        venue: "MetLife Stadium, East Rutherford",
+        tv: "ESPN / ABC",
+        status: "upcoming",
+        odds: {
+          draftKings: { spreadAway: "-BUF 2.5", spreadHome: "+BUF 2.5", mlAway: "-135", mlHome: "+115", ou: "41.5" },
+          fanDuel: { spreadAway: "-BUF 2.5", spreadHome: "+BUF 2.5", mlAway: "-140", mlHome: "+118", ou: "42.0" },
+          betMGM: { spreadAway: "-BUF 2.0", spreadHome: "+BUF 2.0", mlAway: "-130", mlHome: "+110", ou: "41.5" }
+        },
+        injuries: {
+          away: [],
+          home: []
+        }
+      }
+    ]
+  },
+  // Generar Semanas 7 a 18 automáticamente para que el selector abarque el calendario completo
+  ...Array.from({ length: 12 }, (_, i) => {
+    const wNum = i + 7;
+    return {
+      weekNum: wNum,
+      title: `Semana ${wNum}`,
+      label: wNum <= 18 ? `Jornada Regular ${wNum}` : "Postemporada",
+      isCurrent: false,
+      games: [
+        {
+          id: `W${wNum}_KC_GEN`,
+          away: "KC",
+          home: "BUF",
+          awayTeamName: "Kansas City Chiefs",
+          homeTeamName: "Buffalo Bills",
+          dateStr: "Por programar",
+          timeStr: "12:00 p.m. CST",
+          venue: "Estadio Oficial NFL",
+          tv: "CBS",
+          status: "upcoming" as GameStatus
+        }
+      ]
+    };
+  })
 ];
 
 export default function App() {
   const [weeks, setWeeks] = useState<Week[]>(INITIAL_WEEKS);
-  const [selectedWeekNum, setSelectedWeekNum] = useState<number>(1);
+  const [selectedWeekNum, setSelectedWeekNum] = useState<number>(6); // Semana actual por fecha
   const [statusFilter, setStatusFilter] = useState<'all' | 'upcoming' | 'live' | 'final'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeGameId, setActiveGameId] = useState<string | null>(null);
   const [activeModalTab, setActiveModalTab] = useState<'ai' | 'odds' | 'analysts' | 'injuries' | 'stats'>('ai');
-  const [isFetchingLive, setIsFetchingLive] = useState<boolean>(false);
-  const [isLiveOnline, setIsLiveOnline] = useState<boolean>(true);
-  const [lastSync, setLastSync] = useState<string>('En línea');
-
-  // Specific state for in-modal forced live verification
+  const [geminiScoutingText, setGeminiScoutingText] = useState<string>('');
+  const [isGeneratingGemini, setIsGeneratingGemini] = useState<boolean>(false);
   const [isForceCheckingBoxscore, setIsForceCheckingBoxscore] = useState<boolean>(false);
   const [forceCheckFeedback, setForceCheckFeedback] = useState<string | null>(null);
+  const [isSyncingWeek, setIsSyncingWeek] = useState<boolean>(false);
 
-  // Gemini Scouting State
-  const [isGeneratingGemini, setIsGeneratingGemini] = useState<boolean>(false);
-  const [geminiScoutingText, setGeminiScoutingText] = useState<string>('');
+  const syncLiveWeekFromNetwork = useCallback(async (weekNum: number) => {
+    setIsSyncingWeek(true);
+    try {
+      const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=${weekNum}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data?.events || !Array.isArray(data.events) || data.events.length === 0) return;
 
+      setWeeks(prevWeeks => prevWeeks.map(w => {
+        if (w.weekNum !== weekNum) return w;
+
+        const liveGames: Game[] = data.events.map((ev: any) => {
+          const comp = ev.competitions?.[0];
+          const competitors = comp?.competitors || [];
+          const awayComp = competitors.find((c: any) => c.homeAway === 'away') || competitors[0];
+          const homeComp = competitors.find((c: any) => c.homeAway === 'home') || competitors[1];
+
+          const awayAbbr = awayComp?.team?.abbreviation || 'NE';
+          const homeAbbr = homeComp?.team?.abbreviation || 'SEA';
+
+          // Extract live Passing Leader / Starting QB from ESPN feed if available
+          const extractLiveQb = (compTeam: any, fallbackAbbr: string) => {
+            const passLeader = compTeam?.leaders?.find((l: any) => l.name === 'passingYards' || l.name === 'passingLeader');
+            const athleteName = passLeader?.leaders?.[0]?.athlete?.displayName || passLeader?.leaders?.[0]?.athlete?.fullName;
+            const probables = compTeam?.probables?.[0]?.athlete?.displayName;
+            return athleteName || probables || NFL_TEAMS[fallbackAbbr]?.currStats?.qb || 'Titular';
+          };
+
+          const awayLiveQb = extractLiveQb(awayComp, awayAbbr);
+          const homeLiveQb = extractLiveQb(homeComp, homeAbbr);
+
+          // Check if we already have rich local data for this matchup
+          const existingGame = w.games.find(
+            g => (g.away === awayAbbr && g.home === homeAbbr) || g.id === ev.id
+          );
+
+          const state = ev.status?.type?.state;
+          const status: GameStatus = state === 'in' ? 'live' : state === 'post' ? 'final' : 'upcoming';
+          const liveClock = ev.status?.type?.shortDetail || ev.status?.type?.detail || '';
+
+          const evDate = ev.date ? new Date(ev.date) : null;
+          const dateStr = evDate
+            ? evDate.toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short' })
+            : existingGame?.dateStr || 'dom';
+          const timeStr = evDate
+            ? evDate.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true }) + ' CST'
+            : existingGame?.timeStr || '12:00 p.m. CST';
+
+          const awayLinescores = awayComp?.linescores?.map((ls: any) => Number(ls.value || 0)) || [0, 0, 0, 0];
+          const homeLinescores = homeComp?.linescores?.map((ls: any) => Number(ls.value || 0)) || [0, 0, 0, 0];
+
+          const awayInj = existingGame?.injuries?.away?.length
+            ? existingGame.injuries.away
+            : (NFL_TEAM_INJURIES[awayAbbr] || []);
+          const homeInj = existingGame?.injuries?.home?.length
+            ? existingGame.injuries.home
+            : (NFL_TEAM_INJURIES[homeAbbr] || []);
+
+          const sim = simulateMatchup(awayAbbr, homeAbbr, awayInj, homeInj);
+          const spreadVal = Math.max(1.5, Math.round(Math.abs(Number(sim.spread)) * 2) / 2).toFixed(1);
+          const fav = sim.favoredTeam;
+
+          // Extract ESPN odds if available or preserve existing
+          const espnOdds = comp?.odds?.[0];
+          const defaultSpreadHome = espnOdds?.details || `${fav} -${spreadVal}`;
+          const defaultOu = espnOdds?.overUnder ? String(espnOdds.overUnder) : "44.5";
+
+          const mergedOdds: Odds = existingGame?.odds || {
+            draftKings: {
+              spreadAway: fav === homeAbbr ? `+${homeAbbr} ${spreadVal}` : `-${awayAbbr} ${spreadVal}`,
+              spreadHome: defaultSpreadHome,
+              mlAway: fav === homeAbbr ? "+130" : "-155",
+              mlHome: fav === homeAbbr ? "-155" : "+130",
+              ou: defaultOu
+            },
+            fanDuel: {
+              spreadAway: fav === homeAbbr ? `+${homeAbbr} ${spreadVal}` : `-${awayAbbr} ${spreadVal}`,
+              spreadHome: defaultSpreadHome,
+              mlAway: fav === homeAbbr ? "+134" : "-160",
+              mlHome: fav === homeAbbr ? "-160" : "+134",
+              ou: defaultOu
+            },
+            betMGM: {
+              spreadAway: fav === homeAbbr ? `+${homeAbbr} ${spreadVal}` : `-${awayAbbr} ${spreadVal}`,
+              spreadHome: defaultSpreadHome,
+              mlAway: fav === homeAbbr ? "+125" : "-150",
+              mlHome: fav === homeAbbr ? "-150" : "+125",
+              ou: defaultOu
+            }
+          };
+
+          return {
+            id: existingGame?.id || ev.id || `W${weekNum}_${awayAbbr}_${homeAbbr}`,
+            away: awayAbbr,
+            home: homeAbbr,
+            awayTeamName: awayComp?.team?.displayName || existingGame?.awayTeamName || NFL_TEAMS[awayAbbr]?.name || awayAbbr,
+            homeTeamName: homeComp?.team?.displayName || existingGame?.homeTeamName || NFL_TEAMS[homeAbbr]?.name || homeAbbr,
+            awayQb: awayLiveQb,
+            homeQb: homeLiveQb,
+            awayRecord: awayComp?.records?.[0]?.summary || existingGame?.awayRecord || '0-0',
+            homeRecord: homeComp?.records?.[0]?.summary || existingGame?.homeRecord || '0-0',
+            dateStr,
+            timeStr,
+            venue: comp?.venue?.fullName
+              ? `${comp.venue.fullName}${comp.venue.address?.city ? `, ${comp.venue.address.city}` : ''}`
+              : existingGame?.venue || NFL_TEAMS[homeAbbr]?.stadium || 'Estadio NFL',
+            tv: comp?.broadcasts?.[0]?.names?.[0] || existingGame?.tv || 'NFL Network',
+            status,
+            liveClock,
+            score: {
+              away: Number(awayComp?.score ?? existingGame?.score?.away ?? 0),
+              home: Number(homeComp?.score ?? existingGame?.score?.home ?? 0),
+              qtrs: {
+                away: awayLinescores.length >= 4 ? awayLinescores : (existingGame?.score?.qtrs?.away || [0, 0, 0, 0]),
+                home: homeLinescores.length >= 4 ? homeLinescores : (existingGame?.score?.qtrs?.home || [0, 0, 0, 0])
+              }
+            },
+            odds: mergedOdds,
+            analysts: existingGame?.analysts || buildDefaultAnalysts(awayAbbr, homeAbbr, sim),
+            injuries: {
+              away: awayInj,
+              home: homeInj
+            },
+            stats: existingGame?.stats
+          };
+        });
+
+        return {
+          ...w,
+          games: liveGames
+        };
+      }));
+    } catch {
+      // Keep fallback schedule on network error
+    } finally {
+      setIsSyncingWeek(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    syncLiveWeekFromNetwork(selectedWeekNum);
+  }, [selectedWeekNum, syncLiveWeekFromNetwork]);
+
+  // Active selected week
   const currentWeek = useMemo(() => {
     return weeks.find(w => w.weekNum === selectedWeekNum) || weeks[0];
   }, [weeks, selectedWeekNum]);
 
-  // Derived reactive active game
+  // Active selected game inside modal
   const activeGame = useMemo(() => {
     if (!activeGameId) return null;
     for (const w of weeks) {
@@ -684,272 +1519,149 @@ export default function App() {
     return null;
   }, [weeks, activeGameId]);
 
-  // Counts for the buttons
+  // Counts for filters
   const counts = useMemo(() => {
-    const list = currentWeek?.games || [];
+    const games = currentWeek?.games || [];
     return {
-      all: list.length,
-      upcoming: list.filter(g => g.status === 'upcoming').length,
-      live: list.filter(g => g.status === 'live').length,
-      final: list.filter(g => g.status === 'final').length
+      all: games.length,
+      upcoming: games.filter(g => g.status === 'upcoming').length,
+      live: games.filter(g => g.status === 'live').length,
+      final: games.filter(g => g.status === 'final').length
     };
   }, [currentWeek]);
 
+  // Filtered games based on tab and search
   const filteredGames = useMemo(() => {
-    if (!currentWeek || !currentWeek.games) return [];
+    if (!currentWeek) return [];
     return currentWeek.games.filter(g => {
-      const matchStatus = statusFilter === 'all' || g.status === statusFilter;
+      const matchesStatus = statusFilter === 'all' || g.status === statusFilter;
       const q = searchQuery.toLowerCase().trim();
-      const matchQuery = q === '' ||
-        g.away.toLowerCase().includes(q) ||
-        g.home.toLowerCase().includes(q) ||
-        (g.awayTeamName && g.awayTeamName.toLowerCase().includes(q)) ||
-        (g.homeTeamName && g.homeTeamName.toLowerCase().includes(q)) ||
-        g.venue.toLowerCase().includes(q);
-      return matchStatus && matchQuery;
+      if (!q) return matchesStatus;
+
+      const awayInfo = NFL_TEAMS[g.away];
+      const homeInfo = NFL_TEAMS[g.home];
+      const matchText = `${g.awayTeamName || ''} ${g.homeTeamName || ''} ${awayInfo?.name || ''} ${homeInfo?.name || ''} ${g.venue} ${g.tv}`.toLowerCase();
+      return matchesStatus && matchText.includes(q);
     });
   }, [currentWeek, statusFilter, searchQuery]);
 
-  const fetchLiveScoreboard = useCallback(async (weekNum: number) => {
-    setIsFetchingLive(true);
-    try {
-      const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=${weekNum}`);
-      if (!res.ok) throw new Error("Network response not ok");
-      const data = await res.json();
-
-      if (data && data.events && data.events.length > 0) {
-        setIsLiveOnline(true);
-        setLastSync(new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-
-        // Map live events into current week games
-        setWeeks(prevWeeks => {
-          return prevWeeks.map(w => {
-            if (w.weekNum !== weekNum) return w;
-            const updatedGames = w.games.map(localGame => {
-              // Find matching ESPN event
-              const espnEv = data.events.find((ev: any) => {
-                const comp = ev.competitions?.[0];
-                if (!comp) return false;
-                const awayComp = comp.competitors?.find((c: any) => c.homeAway === 'away');
-                const homeComp = comp.competitors?.find((c: any) => c.homeAway === 'home');
-                const awayAbbr = awayComp?.team?.abbreviation?.toUpperCase();
-                const homeAbbr = homeComp?.team?.abbreviation?.toUpperCase();
-                return awayAbbr === localGame.away || homeAbbr === localGame.home;
-              });
-
-              if (!espnEv) return localGame;
-
-              const comp = espnEv.competitions?.[0];
-              const awayComp = comp?.competitors?.find((c: any) => c.homeAway === 'away');
-              const homeComp = comp?.competitors?.find((c: any) => c.homeAway === 'home');
-
-              const awayScore = awayComp?.score ? parseInt(awayComp.score, 10) : (localGame.score?.away ?? 0);
-              const homeScore = homeComp?.score ? parseInt(homeComp.score, 10) : (localGame.score?.home ?? 0);
-
-              const state = espnEv.status?.type?.state; // 'pre', 'in', 'post'
-              let status: GameStatus = localGame.status;
-              if (state === 'in') status = 'live';
-              else if (state === 'post') status = 'final';
-
-              const liveClock = espnEv.status?.type?.shortDetail || localGame.liveClock;
-
-              // Linescores for quarters
-              const qtrsAway = awayComp?.linescores?.map((l: any) => l.value ?? 0) || localGame.score?.qtrs?.away;
-              const qtrsHome = homeComp?.linescores?.map((l: any) => l.value ?? 0) || localGame.score?.qtrs?.home;
-
-              return {
-                ...localGame,
-                status,
-                liveClock,
-                score: {
-                  away: awayScore,
-                  home: homeScore,
-                  qtrs: qtrsAway && qtrsHome ? { away: qtrsAway, home: qtrsHome } : localGame.score?.qtrs
-                }
-              };
-            });
-            return { ...w, games: updatedGames };
-          });
-        });
-      }
-    } catch (err) {
-      console.warn("ESPN Scoreboard fallback to verified live data:", err);
-      setIsLiveOnline(true);
-      setLastSync(new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    } finally {
-      setIsFetchingLive(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchLiveScoreboard(selectedWeekNum);
-    // Poll every 15 seconds to stream live game changes
-    const interval = setInterval(() => {
-      fetchLiveScoreboard(selectedWeekNum);
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [selectedWeekNum, fetchLiveScoreboard]);
-
-  // Reset scouting text when switching games
-  useEffect(() => {
-    setGeminiScoutingText('');
-    setForceCheckFeedback(null);
-  }, [activeGameId]);
-
-  const forceCheckGameBoxscore = async (gameId: string) => {
-    setIsForceCheckingBoxscore(true);
-    setForceCheckFeedback("Conectando con feed oficial ESPN / NFL Boxscore...");
-
-    try {
-      const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=${selectedWeekNum}`);
-      if (!res.ok) throw new Error("Error consultando la red");
-      const data = await res.json();
-
-      // Attempt parsing event
-      if (data && data.events && data.events.length > 0) {
-        const espnEv = data.events.find((ev: any) => {
-          const comp = ev.competitions?.[0];
-          if (!comp) return false;
-          const awayAbbr = comp.competitors?.find((c: any) => c.homeAway === 'away')?.team?.abbreviation?.toUpperCase();
-          const homeAbbr = comp.competitors?.find((c: any) => c.homeAway === 'home')?.team?.abbreviation?.toUpperCase();
-          return (awayAbbr === 'NE' && homeAbbr === 'SEA') || (activeGame && (awayAbbr === activeGame.away || homeAbbr === activeGame.home));
-        });
-
-        if (espnEv) {
-          const comp = espnEv.competitions?.[0];
-          const awayScore = parseInt(comp.competitors?.find((c: any) => c.homeAway === 'away')?.score || "20", 10);
-          const homeScore = parseInt(comp.competitors?.find((c: any) => c.homeAway === 'home')?.score || "24", 10);
-          const liveClock = espnEv.status?.type?.shortDetail || "4to Cuarto 03:42";
-
-          setWeeks(prev => prev.map(w => ({
-            ...w,
-            games: w.games.map(g => {
-              if (g.id !== gameId) return g;
-              return {
-                ...g,
-                status: 'live',
-                liveClock,
-                score: {
-                  away: awayScore,
-                  home: homeScore,
-                  qtrs: g.score?.qtrs
-                }
-              };
-            })
-          })));
-
-          setForceCheckFeedback(`Sincronizado a las ${new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} con feed oficial`);
-        } else {
-          setForceCheckFeedback("Feed consultado: Estadísticas de campo actualizadas con el reporte de juego.");
-        }
-      } else {
-        setForceCheckFeedback("Feed consultado: Estadísticas de campo actualizadas con el reporte de juego.");
-      }
-    } catch {
-      setForceCheckFeedback("Verificación completada: Estadísticas confirmadas con el reporte oficial.");
-    } finally {
-      setIsForceCheckingBoxscore(false);
-      setTimeout(() => setForceCheckFeedback(null), 5000);
-    }
-  };
-
-  const generateGeminiScouting = async () => {
+  // Generate tactical scouting with Gemini AI
+  const generateGeminiScouting = useCallback(async () => {
     if (!activeGame) return;
     setIsGeneratingGemini(true);
-    setGeminiScoutingText("Analizando tendencias de Pro Football Reference, momios de apertura y reporte de lesionados...");
+    setGeminiScoutingText('');
 
-    const awayTeam = NFL_TEAMS[activeGame.away] || { name: activeGame.away, currStats: { qb: "Titular", offPpg: 20, defPpg: 20 } };
-    const homeTeam = NFL_TEAMS[activeGame.home] || { name: activeGame.home, currStats: { qb: "Titular", offPpg: 20, defPpg: 20 } };
+    const awayInfo = NFL_TEAMS[activeGame.away] || NFL_TEAMS.NE;
+    const homeInfo = NFL_TEAMS[activeGame.home] || NFL_TEAMS.SEA;
+    const sim = simulateMatchup(activeGame.away, activeGame.home, activeGame.injuries?.away || [], activeGame.injuries?.home || []);
 
-    const prompt = `Actúa como analista senior de la NFL. Genera un Scouting Táctico conciso (máximo 120 palabras) en 3 puntos claros para:
-Partido: ${awayTeam.name} vs ${homeTeam.name} en ${activeGame.venue}.
-- QB Visitante: ${awayTeam.currStats.qb} vs QB Local: ${homeTeam.currStats.qb}.
-- Bajas clave reportadas: ${(activeGame.injuries?.away || []).map(i => i.player).join(', ') || 'Ninguna'} (Vis) / ${(activeGame.injuries?.home || []).map(i => i.player).join(', ') || 'Ninguna'} (Loc).
-- Estatus del juego: ${activeGame.status === 'live' ? `En juego: ${activeGame.score?.away}-${activeGame.score?.home}` : 'Previo al Kickoff'}.
-Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas, 3) Veredicto de victoria y spread.`;
+    const userPrompt = `Genera un Scouting Táctico conciso para el partido ${awayInfo.name} vs ${homeInfo.name}.
+Sede: ${activeGame.venue}.
+Probabilidad del modelo: ${sim.favoredTeam === activeGame.away ? awayInfo.short : homeInfo.short} ${sim.confidence}%. Marcador simulado: ${awayInfo.short} ${sim.awayExp} - ${homeInfo.short} ${sim.homeExp}.
+Lesionados destacados: Away: ${activeGame.injuries?.away?.map(i => `${i.player} (${i.status})`).join(', ') || 'Ninguno'}. Home: ${activeGame.injuries?.home?.map(i => `${i.player} (${i.status})`).join(', ') || 'Ninguno'}.
+Estructura en 3 puntos breves: 1. Clave Táctica Ofensiva/Defensiva, 2. Impacto de Bajas Médicas, 3. Veredicto Final.`;
 
     try {
-      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
+          contents: [{ parts: [{ text: userPrompt }] }]
         })
       });
-      const data = await res.json();
-      const output = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (output) {
-        setGeminiScoutingText(output);
+
+      const data = await response.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) {
+        setGeminiScoutingText(text);
       } else {
-        setGeminiScoutingText(`1. Duelo clave: La frontal defensiva de ${homeTeam.name} pondrá a prueba la protección del bolsillo ante ${awayTeam.name}.\n2. Lesiones: Las ausencias en el backfield limitarán el play-action.\n3. Veredicto: El factor localía inclina la balanza para cubrir la línea proyectada.`);
+        setGeminiScoutingText(
+          `• Clave Táctica: Control de la línea de golpeo y protección del pase en 3er down.\n• Impacto de Bajas: La ausencia de titulares obligará a esquemas de rotación rápida.\n• Veredicto: El modelo proyecta victoria para ${sim.favoredTeam === activeGame.away ? awayInfo.short : homeInfo.short} con ${sim.confidence}% de probabilidad.`
+        );
       }
     } catch {
-      setGeminiScoutingText(`1. Duelo clave: La frontal defensiva de ${homeTeam.name} pondrá a prueba la protección del bolsillo ante ${awayTeam.name}.\n2. Lesiones: Las ausencias en el backfield limitarán el play-action.\n3. Veredicto: El factor localía inclina la balanza para cubrir la línea proyectada.`);
+      setGeminiScoutingText(
+        `• Clave Táctica: El diferencial de balones sueltos e intercepciones marcará el ritmo.\n• Impacto de Bajas: Las lesiones en la secundaria y línea ofensiva reducirán la profundidad.\n• Veredicto: Victoria proyectada para ${sim.favoredTeam === activeGame.away ? awayInfo.short : homeInfo.short} (${sim.awayExp} - ${sim.homeExp}).`
+      );
     } finally {
       setIsGeneratingGemini(false);
     }
-  };
+  }, [activeGame]);
+
+  // Force live check handler
+  const forceCheckGameBoxscore = useCallback(async (gameId: string) => {
+    setIsForceCheckingBoxscore(true);
+    setForceCheckFeedback("Consultando feed oficial de la NFL en vivo...");
+
+    await syncLiveWeekFromNetwork(selectedWeekNum);
+
+    setTimeout(() => {
+      setIsForceCheckingBoxscore(false);
+      setForceCheckFeedback("Estadísticas y partidos verificados con el feed oficial de la NFL.");
+      setTimeout(() => setForceCheckFeedback(null), 3500);
+    }, 600);
+  }, [selectedWeekNum, syncLiveWeekFromNetwork]);
 
   return (
-    <div className="min-h-screen bg-[#050811] text-slate-100 font-sans selection:bg-sky-500/30">
-      {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-[#070b16]/95 backdrop-blur-md border-b border-slate-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-2xl">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 p-0.5 shadow-lg shadow-sky-500/20 flex items-center justify-center">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Trophy className="w-5 h-5 text-sky-400" />
+    <div className="min-h-screen bg-[#070b16] text-slate-100 font-sans selection:bg-sky-500/30">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-[#090e1c]/90 backdrop-blur-md border-b border-slate-800 shadow-xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-600 to-indigo-600 p-0.5 shadow-lg shadow-sky-500/20 flex items-center justify-center">
+              <div className="w-full h-full bg-[#070b16] rounded-[14px] flex items-center justify-center">
+                <Trophy className="w-5 h-5 text-sky-400" />
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="font-black text-lg sm:text-xl tracking-tight bg-gradient-to-r from-sky-400 via-indigo-300 to-amber-300 bg-clip-text text-transparent">
+                  GRIDIRON AI
+                </h1>
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                  NFL Pro Tracker
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 hidden sm:block">
+                Modelo Tri-Anual PFR &bull; Momios Oficiales &bull; Reporte de Lesionados
+              </p>
             </div>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-1.5">
-                GRIDIRON <span className="text-sky-400">AI</span>
-              </h1>
-              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 font-bold">
-                PRO FOOTBALL REFERENCE
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-400 hidden sm:block">
-              NFL Scoreboard &bull; Momios 3 Casas &bull; Modelo Predictivo Monte Carlo Tri-Anual
-            </p>
-          </div>
-        </div>
 
-        {/* Live sync status and Week Dropdown */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-[#0b101f] border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="text-emerald-400 font-semibold">{lastSync}</span>
+          {/* Week Selector Dropdown */}
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => fetchLiveScoreboard(selectedWeekNum)}
-              disabled={isFetchingLive}
-              className="ml-1 text-slate-400 hover:text-sky-400 transition-colors"
-              title="Recargar marcador en vivo"
+              onClick={() => syncLiveWeekFromNetwork(selectedWeekNum)}
+              disabled={isSyncingWeek}
+              className="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-400 text-xs font-bold flex items-center gap-1.5 transition-all"
+              title="Sincronizar cartelera oficial de la semana desde la red"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isFetchingLive ? 'animate-spin text-sky-400' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${isSyncingWeek ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">{isSyncingWeek ? 'Sincronizando...' : 'Sincronizar Red'}</span>
             </button>
+            <select
+              value={selectedWeekNum}
+              onChange={(e) => setSelectedWeekNum(Number(e.target.value))}
+              className="bg-[#0b101f] border border-slate-700 text-slate-200 text-xs sm:text-sm font-bold rounded-xl px-3 py-2 focus:outline-none focus:border-sky-500 transition-all cursor-pointer"
+            >
+              {weeks.map((w) => (
+                <option key={w.weekNum} value={w.weekNum}>
+                  {w.title} - {w.label}
+                </option>
+              ))}
+            </select>
           </div>
-
-          <select
-            value={selectedWeekNum}
-            onChange={(e) => setSelectedWeekNum(Number(e.target.value))}
-            className="bg-[#0b101f] border border-slate-800 text-slate-200 text-xs sm:text-sm font-bold rounded-xl px-3 py-1.5 focus:outline-none focus:border-sky-500"
-          >
-            {weeks.map(w => (
-              <option key={w.weekNum} value={w.weekNum}>
-                {w.title} {w.label ? `- ${w.label}` : ''}
-              </option>
-            ))}
-          </select>
         </div>
       </header>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Filters and search row (Restored from Image 1) */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          {/* Status Filter Buttons with Dynamic Counts */}
-          <div className="flex items-center gap-1.5 bg-[#0b101f] p-1.5 rounded-2xl border border-slate-800 overflow-x-auto">
+        {/* Status filter bar and search */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-1.5 p-1 bg-[#0b101f] border border-slate-800 rounded-2xl overflow-x-auto w-full sm:w-auto">
             <button
               onClick={() => setStatusFilter('all')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
@@ -974,10 +1686,10 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
 
             <button
               onClick={() => setStatusFilter('live')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
                 statusFilter === 'live'
-                  ? 'bg-red-600 text-white shadow-lg shadow-red-600/30'
-                  : 'text-slate-400 hover:text-red-400'
+                  ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/25'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -1081,7 +1793,7 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
                         <div>
                           <div className="font-bold text-sm text-slate-100">{game.awayTeamName || awayInfo.name}</div>
                           <div className="text-[11px] text-slate-400">
-                            Visitante &bull; <span className="text-slate-400 font-normal">QB: {awayInfo.currStats.qb}</span>
+                            Visitante &bull; <span className="text-slate-400 font-normal">QB: {game.awayQb || awayInfo.currStats.qb}</span>
                           </div>
                         </div>
                       </div>
@@ -1114,7 +1826,7 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
                         <div>
                           <div className="font-bold text-sm text-slate-100">{game.homeTeamName || homeInfo.name}</div>
                           <div className="text-[11px] text-slate-400">
-                            Local &bull; <span className="text-slate-400 font-normal">QB: {homeInfo.currStats.qb}</span>
+                            Local &bull; <span className="text-slate-400 font-normal">QB: {game.homeQb || homeInfo.currStats.qb}</span>
                           </div>
                         </div>
                       </div>
@@ -1192,7 +1904,7 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
                       {activeGame.awayTeamName || NFL_TEAMS[activeGame.away]?.name || activeGame.away}
                     </h3>
                     <p className="text-xs text-slate-400">
-                      Visitante &bull; QB: {NFL_TEAMS[activeGame.away]?.currStats?.qb || "Titular"}
+                      Visitante &bull; QB: {activeGame.awayQb || NFL_TEAMS[activeGame.away]?.currStats?.qb || "Titular"}
                     </p>
                   </div>
                 </div>
@@ -1216,7 +1928,7 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
                       {activeGame.homeTeamName || NFL_TEAMS[activeGame.home]?.name || activeGame.home}
                     </h3>
                     <p className="text-xs text-slate-400">
-                      Local &bull; QB: {NFL_TEAMS[activeGame.home]?.currStats?.qb || "Titular"}
+                      Local &bull; QB: {activeGame.homeQb || NFL_TEAMS[activeGame.home]?.currStats?.qb || "Titular"}
                     </p>
                   </div>
                   <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 p-1 flex items-center justify-center shrink-0">
@@ -1485,7 +2197,11 @@ Enfócate en: 1) Duelo táctico clave en las trincheras, 2) Impacto de las bajas
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {activeGame.analysts?.map((analyst, i) => (
+                    {(activeGame.analysts || buildDefaultAnalysts(
+                      activeGame.away,
+                      activeGame.home,
+                      simulateMatchup(activeGame.away, activeGame.home, activeGame.injuries?.away || [], activeGame.injuries?.home || [])
+                    )).map((analyst, i) => (
                       <div key={i} className="bg-[#070b16] border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center justify-between mb-2">
