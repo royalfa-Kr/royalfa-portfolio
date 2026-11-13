@@ -1,5 +1,7 @@
 # Mythos Weaver — Reglas de interfaz
 
+#Inicio del documento
+
 Versión del documento: 0.1
 
 ## 1. Objetivo visual
@@ -148,3 +150,5 @@ Las notas libres deben indicar que no alteran por sí solas las reglas.
 - Audio automático.
 - Ilustraciones generadas.
 - Réplica exacta del diseño oficial de cartas.
+
+#Fin del documento

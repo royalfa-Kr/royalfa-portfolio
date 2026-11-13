@@ -1,5 +1,7 @@
 # Mythos Weaver — Arquitectura
 
+#Inicio del documento
+
 Versión del documento: 0.1
 
 ## 1. Estilo
@@ -299,3 +301,5 @@ Una actualización no modifica silenciosamente escenarios guardados.
 
 No se promete reproducir exactamente una salida de IA.
 Se conserva la definición aceptada y su procedencia.
+
+#Fin del documento

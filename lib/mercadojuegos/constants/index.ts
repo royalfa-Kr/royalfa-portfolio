@@ -3,7 +3,7 @@ import type {
   ListingCondition,
   ListingOperationType,
   SectionLink,
-} from "@/types/mercadojuegos";
+} from "../../../types/mercadojuegos";
 
 export const mercadoJuegosSections: SectionLink[] = [
   {

@@ -1,5 +1,7 @@
 # Mythos Weaver — Esquema de persistencia
 
+#Inicio del documento
+
 Versión del documento: 0.1
 Base propuesta: IndexedDB
 Nombre: mythos-weaver
@@ -402,3 +404,5 @@ Esa migración deberá añadir:
 - Política de respaldo y recuperación.
 
 No forma parte del MVP local-first.
+
+#Fin del documento

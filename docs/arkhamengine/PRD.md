@@ -1,5 +1,7 @@
 # Mythos Weaver — PRD
 
+# Inicio del documento
+
 Versión del documento: 0.1
 Estado: especificación inicial
 Identificador técnico: arkhamengine
@@ -170,3 +172,5 @@ los bloqueos posibles; la jugabilidad requiere pruebas humanas.
 - Acceso privado o público del primer despliegue.
 - Límites narrativos y contenido no deseado.
 - Necesidad futura de cuentas y sincronización.
+
+# Fin del documento
