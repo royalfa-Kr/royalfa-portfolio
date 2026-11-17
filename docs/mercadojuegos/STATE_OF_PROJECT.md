@@ -1,7 +1,7 @@
 # State of Project - MercadoJuegos
 
 ## 1. Estado general
-Proyecto en fase de definición y preparación del MVP para una app web de compra, venta e intercambio de juegos de mesa.
+Proyecto en fase inicial con Sprint 0 completado para el MVP de una app web de compra, venta e intercambio de juegos de mesa.
 
 ## 2. Ruta del proyecto dentro del repo
 - app/apps/tools/mercadojuegos
@@ -17,7 +17,7 @@ Proyecto en fase de definición y preparación del MVP para una app web de compr
 - GitHub
 
 ## 4. Objetivo actual
-Construir MVP web para CDMX con autenticación, publicaciones, búsqueda, wishlist y mensajería básica.
+Arrancar Sprint 1 inicial para implementar autenticación con Supabase, perfil base y protección de rutas.
 
 ## 5. Alcance aprobado del MVP
 - autenticación
@@ -30,28 +30,34 @@ Construir MVP web para CDMX con autenticación, publicaciones, búsqueda, wishli
 - reportes básicos
 
 ## 6. Funcionalidades implementadas
-- [ ] documentación base del proyecto
-- [ ] estructura base de carpetas de MercadoJuegos
-- [ ] layout base de la app
-- [ ] home de MercadoJuegos
-- [ ] placeholders de rutas principales
+- [x] documentación base del proyecto
+- [x] estructura base de carpetas de MercadoJuegos
+- [x] layout base de la app
+- [x] home de MercadoJuegos
+- [x] placeholders de rutas principales
+- [x] componentes base AppHeader, MercadoJuegosShell y SectionPlaceholder
+- [x] constantes base del dominio
+- [x] utilidades base
+- [x] tipos base del dominio
 
 ## 7. Funcionalidades pendientes
-- definir esquema SQL inicial
+- definir esquema SQL inicial detallado
 - crear tablas en Supabase
 - configurar políticas RLS
-- implementar auth
+- implementar auth real con Supabase
+- implementar perfil básico
+- implementar protección de rutas
 - implementar CRUD de publicaciones
 - implementar wishlist
 - implementar mensajería
 - implementar reportes
 - agregar validaciones
-- agregar estados de carga y error
-- documentar pruebas manuales
+- agregar estados de carga y error más robustos
+- documentar pruebas manuales por feature
 
 ## 8. Decisiones aprobadas
 - nombre técnico del proyecto: mercadojuegos
-- ruta principal: app/apps/mercadojuegos
+- ruta principal: app/apps/tools/mercadojuegos
 - documentación del proyecto: docs/mercadojuegos
 - enfoque inicial: web app responsive
 - mercado inicial: CDMX
@@ -59,6 +65,8 @@ Construir MVP web para CDMX con autenticación, publicaciones, búsqueda, wishli
 - no integrar pagos en MVP
 - no rediseñar globalmente el sitio principal
 - la app debe convivir con el portfolio existente sin romper otras secciones
+- enums y tipos internos del dominio se manejan en inglés
+- contenido visible al usuario puede mantenerse en español durante la fase inicial
 
 ## 9. Restricciones
 - no modificar otras apps o rutas sin autorización
@@ -73,8 +81,9 @@ Construir MVP web para CDMX con autenticación, publicaciones, búsqueda, wishli
 - diferencias entre documentación y código real
 - refactors no solicitados
 - crecimiento desordenado si no se modulariza bien
+- posible necesidad futura de suavizar integración visual con el layout global del sitio
 
 ## 11. Última actualización
 - Fecha:
 - Responsable:
-- Resumen:
+- Resumen: Sprint 0 completado con estructura base, rutas placeholder, componentes compartidos, utilidades, constantes, tipos y documentación inicial.

@@ -3,49 +3,67 @@ import type {
   ListingCondition,
   ListingOperationType,
   SectionLink,
-} from "../../../types/mercadojuegos";
+} from "../../types/mercadojuegos";
+
+export const MERCADOJUEGOS_BASE_PATH = "/apps/tools/mercadojuegos";
+
+export const MERCADOJUEGOS_PROTECTED_ROUTES = [
+  `${MERCADOJUEGOS_BASE_PATH}/profile`,
+  `${MERCADOJUEGOS_BASE_PATH}/wishlist`,
+  `${MERCADOJUEGOS_BASE_PATH}/listings/new`,
+] as const;
 
 export const mercadoJuegosSections: SectionLink[] = [
   {
-    href: "/apps/mercadojuegos",
+    href: MERCADOJUEGOS_BASE_PATH,
     label: "Inicio",
     description: "Vista general de la app",
   },
   {
-    href: "/apps/mercadojuegos/auth/login",
-    label: "Login",
-    description: "Acceso de usuarios",
-  },
-  {
-    href: "/apps/mercadojuegos/auth/register",
-    label: "Registro",
-    description: "Alta de usuarios",
-  },
-  {
-    href: "/apps/mercadojuegos/listings",
+    href: `${MERCADOJUEGOS_BASE_PATH}/listings`,
     label: "Publicaciones",
     description: "Listado de juegos",
   },
   {
-    href: "/apps/mercadojuegos/listings/new",
+    href: `${MERCADOJUEGOS_BASE_PATH}/listings/new`,
     label: "Nueva publicación",
     description: "Crear publicación",
   },
   {
-    href: "/apps/mercadojuegos/wishlist",
+    href: `${MERCADOJUEGOS_BASE_PATH}/wishlist`,
     label: "Wishlist",
     description: "Juegos deseados",
   },
   {
-    href: "/apps/mercadojuegos/messages",
+    href: `${MERCADOJUEGOS_BASE_PATH}/messages`,
     label: "Mensajes",
     description: "Conversaciones",
   },
   {
-    href: "/apps/mercadojuegos/profile",
+    href: `${MERCADOJUEGOS_BASE_PATH}/profile`,
     label: "Perfil",
     description: "Perfil del usuario",
   },
+];
+
+export const cdmxBoroughs: string[] = [
+  "Álvaro Obregón",
+  "Azcapotzalco",
+  "Benito Juárez",
+  "Coyoacán",
+  "Cuajimalpa de Morelos",
+  "Cuauhtémoc",
+  "Gustavo A. Madero",
+  "Iztacalco",
+  "Iztapalapa",
+  "La Magdalena Contreras",
+  "Miguel Hidalgo",
+  "Milpa Alta",
+  "Tláhuac",
+  "Tlalpan",
+  "Venustiano Carranza",
+  "Xochimilco",
+  "Otra / Área Metropolitana",
 ];
 
 export const listingOperationTypes: ListingOperationType[] = [

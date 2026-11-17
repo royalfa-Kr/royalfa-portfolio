@@ -20,3 +20,18 @@ export interface SectionLink {
   label: string;
   description?: string;
 }
+
+export interface BgProfile {
+  id: string;
+  display_name: string;
+  borough: string | null;
+  bio: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UpdateBgProfileInput {
+  display_name: string;
+  borough?: string | null;
+  bio?: string | null;
+}

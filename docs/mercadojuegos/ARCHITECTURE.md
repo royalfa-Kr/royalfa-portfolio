@@ -14,7 +14,7 @@ Construir una app modular dentro del sitio existente, sin romper otras secciones
 
 ## 3. Ubicación dentro del repo
 ### Rutas
-- app/apps/mercadojuegos/*
+- app/apps/tools/mercadojuegos/*
 
 ### Componentes
 - components/mercadojuegos/*

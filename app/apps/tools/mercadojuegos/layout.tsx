@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
-import { MercadoJuegosShell } from "@/components/mercadojuegos/layout/MercadoJuegosShell";
+  import type { ReactNode } from "react";
+  import { MercadoJuegosShell } from "@/components/mercadojuegos/layout/MercadoJuegosShell";
 
-type MercadoJuegosLayoutProps = {
-  children: ReactNode;
-};
+  type MercadoJuegosLayoutProps = {
+    children: ReactNode;
+  };
 
-export default function MercadoJuegosLayout({
-  children,
-}: MercadoJuegosLayoutProps) {
-  return <MercadoJuegosShell>{children}</MercadoJuegosShell>;
-}
+  export default function MercadoJuegosLayout({
+    children,
+  }: MercadoJuegosLayoutProps) {
+    return <MercadoJuegosShell>{children}</MercadoJuegosShell>;
+  }
