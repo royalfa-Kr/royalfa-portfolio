@@ -1,7 +1,7 @@
 # State of Project - MercadoJuegos
 
 ## 1. Estado general
-Proyecto en fase inicial con Sprint 0 completado para el MVP de una app web de compra, venta e intercambio de juegos de mesa.
+Proyecto en desarrollo del MVP (Sprint 1 inicial en curso) para una app web de compra, venta e intercambio de juegos de mesa.
 
 ## 2. Ruta del proyecto dentro del repo
 - app/apps/tools/mercadojuegos
@@ -17,7 +17,7 @@ Proyecto en fase inicial con Sprint 0 completado para el MVP de una app web de c
 - GitHub
 
 ## 4. Objetivo actual
-Arrancar Sprint 1 inicial para implementar autenticación con Supabase, perfil base y protección de rutas.
+Continuar Sprint 1 inicial para implementar los servicios de autenticación y perfil, formularios funcionales y protección de rutas.
 
 ## 5. Alcance aprobado del MVP
 - autenticación
@@ -36,17 +36,19 @@ Arrancar Sprint 1 inicial para implementar autenticación con Supabase, perfil b
 - [x] home de MercadoJuegos
 - [x] placeholders de rutas principales
 - [x] componentes base AppHeader, MercadoJuegosShell y SectionPlaceholder
-- [x] constantes base del dominio
+- [x] constantes base del dominio (con rutas `/apps/tools/mercadojuegos` y catálogo de alcaldías CDMX)
 - [x] utilidades base
-- [x] tipos base del dominio
+- [x] tipos base del dominio (incluyendo `BgProfile` y `UpdateBgProfileInput`)
+- [x] tabla `bg_profiles` con trigger de `updated_at` y políticas RLS en Supabase (`docs/mercadojuegos/sql/001_bg_profiles.sql`)
+- [x] clientes base de Supabase (navegador y servidor) en `lib/mercadojuegos/supabase/`
 
 ## 7. Funcionalidades pendientes
-- definir esquema SQL inicial detallado
-- crear tablas en Supabase
-- configurar políticas RLS
-- implementar auth real con Supabase
-- implementar perfil básico
-- implementar protección de rutas
+- implementar servicios de autenticación y perfil (`auth.ts` y `profiles.ts`)
+- implementar login y registro real en UI
+- implementar vista funcional de perfil básico con creación automática al primer acceso
+- implementar protección de rutas (`profile`, `wishlist`, `listings/new`)
+- actualizar `AppHeader` con estado de sesión y logout
+- definir esquema SQL restante de publicaciones, wishlist, mensajería y reportes
 - implementar CRUD de publicaciones
 - implementar wishlist
 - implementar mensajería
@@ -67,6 +69,8 @@ Arrancar Sprint 1 inicial para implementar autenticación con Supabase, perfil b
 - la app debe convivir con el portfolio existente sin romper otras secciones
 - enums y tipos internos del dominio se manejan en inglés
 - contenido visible al usuario puede mantenerse en español durante la fase inicial
+- estrategia de perfil: asegurar creación automática al primer acceso si no existe
+- rutas protegidas en Sprint 1: `profile`, `wishlist` y `listings/new`
 
 ## 9. Restricciones
 - no modificar otras apps o rutas sin autorización
@@ -84,6 +88,6 @@ Arrancar Sprint 1 inicial para implementar autenticación con Supabase, perfil b
 - posible necesidad futura de suavizar integración visual con el layout global del sitio
 
 ## 11. Última actualización
-- Fecha:
-- Responsable:
-- Resumen: Sprint 0 completado con estructura base, rutas placeholder, componentes compartidos, utilidades, constantes, tipos y documentación inicial.
+- Fecha: 2026-11-17
+- Responsable: Equipo MercadoJuegos
+- Resumen: Avance parcial de Sprint 1 inicial: instalación de paquetes Supabase, creación de tabla `bg_profiles` con RLS en Supabase y script SQL respaldado, actualización de tipos y constantes con rutas canónicas y alcaldías de CDMX, y creación de clientes base `client.ts` y `server.ts`.

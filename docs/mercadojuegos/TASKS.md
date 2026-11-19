@@ -20,15 +20,20 @@
 - [x] Verificar estructura base del proyecto
 
 ## Sprint 1 inicial
+### Done
+- [x] Definir flujo de autenticación del MVP y rutas protegidas
+- [x] Crear tabla `bg_profiles` con políticas RLS en Supabase (`docs/mercadojuegos/sql/001_bg_profiles.sql`)
+- [x] Definir tipos de perfil (`BgProfile`, `UpdateBgProfileInput`) en `types/mercadojuegos/index.ts`
+- [x] Corregir rutas base a `/apps/tools/mercadojuegos` y agregar catálogo de alcaldías CDMX en `lib/mercadojuegos/constants.ts`
+- [x] Configurar clientes base de Supabase (navegador y servidor) en `lib/mercadojuegos/supabase/`
+
 ### To Do
-- [ ] Definir flujo de autenticación del MVP
-- [ ] Configurar cliente de Supabase para MercadoJuegos
+- [ ] Implementar helpers de sesión y estrategia de perfil al primer acceso (`lib/mercadojuegos/auth.ts` y `lib/mercadojuegos/profiles.ts`)
 - [ ] Implementar login real
 - [ ] Implementar registro real
-- [ ] Implementar perfil base del usuario
-- [ ] Definir rutas públicas y rutas protegidas
-- [ ] Proteger rutas que requieran sesión
-- [ ] Definir estrategia de creación automática de perfil
+- [ ] Implementar perfil base del usuario conectado a `bg_profiles`
+- [ ] Actualizar `AppHeader` con estado de sesión y logout
+- [ ] Proteger rutas que requieran sesión (`profile`, `wishlist`, `listings/new`)
 - [ ] Documentar pruebas manuales de auth y perfil
 - [ ] Actualizar STATE_OF_PROJECT y CHANGELOG al cerrar Sprint 1 inicial
 

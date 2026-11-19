@@ -39,6 +39,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Física"]
   },
   {
+    id: "factorizacion1",
+    title: "Factorización de Expresiones Algebraicas",
+    description: "Herramienta interactiva para practicar la factorización de expresiones algebraicas. Permite al estudiante identificar y aplicar diferentes métodos de factorización.",
+    category: "educativas",
+    subject: "Matemáticas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/matematicas/factorizacion1",
+    techStack: ["Next.js", "React", "Matemáticas"]
+  },
+  {
     id: "venn-diagrams",
     title: "Diagramas de Venn",
     description: "Operaciones con conjuntos expresados en un diagrama de Venn.",

@@ -35,3 +35,5 @@ Definir un esquema inicial para el MVP usando Supabase/Postgres.
 ## Notas
 - En Sprint 0 no se implementa aún el esquema SQL final.
 - Este documento sirve como base para Sprint 1 / Sprint 2.
+
+clave supabase proyect: i$,4dE/wNb#UBLL
