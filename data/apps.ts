@@ -50,6 +50,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Matemáticas"]
   },
   {
+    id: "Fracciones intro",
+    title: "Aprender los básico de fracciones",
+    description: "Herramienta interactiva para aprender de fracciones.",
+    category: "educativas",
+    subject: "Matemáticas",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/educativas/matematicas/fraccionesintro",
+    techStack: ["Next.js", "React", "Matemáticas"]
+  },
+  {
     id: "venn-diagrams",
     title: "Diagramas de Venn",
     description: "Operaciones con conjuntos expresados en un diagrama de Venn.",
