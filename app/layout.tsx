@@ -32,14 +32,7 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <footer className="border-t border-base-border py-8 text-center mt-12">
-          <p className="text-sm text-text-muted">
-            <Footer />
-          </p>
-          <p className="text-sm text-text-muted mt-2">
-            © {new Date().getFullYear()} Royalfa. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

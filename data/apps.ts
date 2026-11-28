@@ -149,6 +149,17 @@ export const appsData: AppItem[] = [
     techStack: ["Next.js", "React", "Local Storage"]
   },
   {
+    id: "arkhamwheel",
+    title: "Arkham Wheel",
+    description: "Rueda de la fortuna para el juego de mesa Arkham Horror LCG. Permite girar la rueda y obtener resultados aleatorios para investigadores, su rol, campañas y sets para jugar limited.",
+    category: "juegos",
+    subject: "Arkham Horror LCG",
+    status: "Publicada",
+    isExternal: false,
+    url: "/apps/juegos/arkhamwheel",
+    techStack: ["Next.js", "React", "Local Storage"]
+  },
+  {
     id: "series-tracker",
     title: "Series Tracker",
     description: "Herramienta local para llevar el control exacto de tus series, capítulos vistos y próximos estrenos utilizando IndexedDB para funcionar 100% offline.",

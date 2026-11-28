@@ -61,7 +61,7 @@ export default function Footer() {
         {/* Bottom line */}
         <div className="pt-8 border-t border-base-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-text-muted">
-            © 2026 Royalfa.
+            © {new Date().getFullYear()} Royalfa.
           </p>
           <p className="text-sm text-text-muted italic">
             Learning, systems, stories, and things built with curiosity.
